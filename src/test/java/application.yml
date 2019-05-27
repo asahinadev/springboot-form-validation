@@ -1,0 +1,6 @@
+spring:
+  messages:
+    basename: "i18n/messages"
+    encoding: "utf-8"
+app:  validation:    email:      allows:      - gmail.com
+      denied:      - x.gmail.com
