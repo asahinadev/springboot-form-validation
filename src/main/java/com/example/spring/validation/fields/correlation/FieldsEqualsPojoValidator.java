@@ -1,13 +1,14 @@
-package com.example.spring.validation.fields;
+package com.example.spring.validation.fields.correlation;
 
 import java.util.Objects;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.example.spring.validation.fields.property.FieldsProperty;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
 
-public class FieldsEqualsValidator implements ConstraintValidator<FieldsEquals, FieldsProperty<?>> {
+public class FieldsEqualsPojoValidator implements ConstraintValidator<FieldsEquals, Object> {
 	FieldsEquals annotation;
 
 	@Override
@@ -16,13 +17,15 @@ public class FieldsEqualsValidator implements ConstraintValidator<FieldsEquals, 
 	}
 
 	@Override
-	public boolean isValid(FieldsProperty<?> form, ConstraintValidatorContext context) {
+	public boolean isValid(Object form, ConstraintValidatorContext context) {
 		if (form == null) {
 			return true;
 		}
 
-		Object field1 = form.getMain();
-		Object field2 = form.getSub();
+		BeanWrapper formWrapper = new BeanWrapperImpl(form);
+
+		Object field1 = formWrapper.getPropertyValue(annotation.fieldMain());
+		Object field2 = formWrapper.getPropertyValue(annotation.fieldSub());
 
 		if (Objects.equals(field1, field2)) {
 			return true;

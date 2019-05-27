@@ -1,4 +1,4 @@
-package com.example.spring.validation.fields;
+package com.example.spring.validation.fields.correlation;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.CONSTRUCTOR;

@@ -1,4 +1,4 @@
-package com.example.spring.validation.fields;
+package com.example.spring.validation.fields.correlation;
 
 import java.util.Objects;
 

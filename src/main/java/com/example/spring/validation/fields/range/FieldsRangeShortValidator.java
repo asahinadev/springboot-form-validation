@@ -1,4 +1,4 @@
-package com.example.spring.validation.fields;
+package com.example.spring.validation.fields.range;
 
 import org.slf4j.Logger;
 
