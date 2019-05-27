@@ -31,7 +31,7 @@ import com.example.spring.validation.characters.Numeric;
 })
 public @interface Telephone {
 
-	String message() default "{com.example.spring.validation.Telephone.message}";
+	String message() default "{com.example.spring.validation.phone.Telephone.message}";
 
 	String fieldTel1() default "tel1";
 
@@ -39,7 +39,7 @@ public @interface Telephone {
 
 	String fieldTel3() default "tel3";
 
-	Length lengthTel1() default @Length(min = 3, max = 5);
+	Length lengthTel1() default @Length(min = 2, max = 5);
 
 	Length lengthTel2() default @Length(min = 1, max = 4);
 

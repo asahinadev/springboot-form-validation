@@ -26,7 +26,7 @@ import javax.validation.Payload;
 })
 public @interface FieldsEquals {
 
-	String message() default "{com.example.spring.validation.fields.FieldsEquals.message}";
+	String message() default "{com.example.spring.validation.fields.correlation.FieldsEquals.message}";
 
 	String fieldMain();
 

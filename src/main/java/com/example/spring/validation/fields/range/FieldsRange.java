@@ -39,7 +39,7 @@ import javax.validation.Payload;
 })
 public @interface FieldsRange {
 
-	String message() default "{com.example.spring.validation.fields.FieldsRange.message}";
+	String message() default "{com.example.spring.validation.fields.range.FieldsRange.message}";
 
 	String fieldFrom();
 

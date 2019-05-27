@@ -23,7 +23,7 @@ import javax.validation.Payload;
 @Documented
 public @interface Numeric {
 
-	String message() default "{com.example.spring.validation.Numeric.message}";
+	String message() default "{com.example.spring.validation.characters.Numeric.message}";
 
 	Class<?>[] groups() default {};
 

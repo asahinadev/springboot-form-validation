@@ -38,7 +38,7 @@ import com.example.spring.validation.characters.Numeric;
 		lengthTelEntire = @Length(min = 11, max = 11))
 public @interface Mobile {
 
-	String message() default "{com.example.spring.validation.Mobile.message}";
+	String message() default "{com.example.spring.validation.phone.Mobile.message}";
 
 	@OverridesAttribute(constraint = Telephone.class, name = "fieldTel1")
 	String fieldTel1();
