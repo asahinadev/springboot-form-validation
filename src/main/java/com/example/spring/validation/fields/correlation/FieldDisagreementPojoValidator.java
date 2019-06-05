@@ -2,40 +2,39 @@ package com.example.spring.validation.fields.correlation;
 
 import java.util.Objects;
 
-import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
 
-public class FieldDisagreementPojoValidator implements ConstraintValidator<FieldDisagreement, Object> {
+import com.example.spring.validation.BasedValidator;
+
+public class FieldDisagreementPojoValidator
+		extends BasedValidator<FieldDisagreement, Object> {
+
 	FieldDisagreement annotation;
 
 	@Override
 	public void initialize(FieldDisagreement annotation) {
+
 		this.annotation = annotation;
 	}
 
 	@Override
-	public boolean isValid(Object form, ConstraintValidatorContext context) {
-		if (form == null) {
+	public boolean isValid(Object value, ConstraintValidatorContext context) {
+
+		if (value == null) {
 			return true;
 		}
 
-		BeanWrapper formWrapper = new BeanWrapperImpl(form);
-
-		Object field1 = formWrapper.getPropertyValue(annotation.field());
-		Object field2 = formWrapper.getPropertyValue(annotation.fieldConfime());
+		BeanWrapper form = form(value);
+		Object field1 = property(form, annotation.field());
+		Object field2 = property(form, annotation.fieldConfime());
 
 		if (!Objects.equals(field1, field2)) {
 			return true;
 		}
 
-		context.disableDefaultConstraintViolation();
-		context.buildConstraintViolationWithTemplate(annotation.message())
-				.addPropertyNode(annotation.fieldConfime())
-				.addConstraintViolation();
-
+		error(annotation.fieldConfime(), context, annotation.message());
 		return false;
 
 	}

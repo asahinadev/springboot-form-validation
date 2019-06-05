@@ -2,21 +2,25 @@ package com.example.spring.validation.fields.correlation;
 
 import java.util.Objects;
 
-import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.example.spring.form.Fields;
+import com.example.spring.form.ConfimeType;
+import com.example.spring.validation.BasedValidator;
 
-public class FieldConfimeFormValidator implements ConstraintValidator<FieldConfime, Fields<?>> {
+public class FieldConfimeFormValidator
+		extends BasedValidator<FieldConfime, ConfimeType<?>> {
+
 	FieldConfime annotation;
 
 	@Override
 	public void initialize(FieldConfime annotation) {
+
 		this.annotation = annotation;
 	}
 
 	@Override
-	public boolean isValid(Fields<?> form, ConstraintValidatorContext context) {
+	public boolean isValid(ConfimeType<?> form, ConstraintValidatorContext context) {
+
 		if (form == null) {
 			return true;
 		}
@@ -28,11 +32,7 @@ public class FieldConfimeFormValidator implements ConstraintValidator<FieldConfi
 			return true;
 		}
 
-		context.disableDefaultConstraintViolation();
-		context.buildConstraintViolationWithTemplate(annotation.message())
-				.addPropertyNode(annotation.fieldConfime())
-				.addConstraintViolation();
-
+		error(annotation.fieldConfime(), context, annotation.message());
 		return false;
 
 	}
