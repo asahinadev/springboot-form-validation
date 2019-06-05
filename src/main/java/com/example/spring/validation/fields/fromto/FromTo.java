@@ -1,4 +1,4 @@
-package com.example.spring.validation.fields.range;
+package com.example.spring.validation.fields.fromto;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.CONSTRUCTOR;
@@ -18,28 +18,28 @@ import javax.validation.Payload;
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 @Retention(RUNTIME)
-@Repeatable(Range.List.class)
+@Repeatable(FromTo.List.class)
 @Documented
 @Constraint(validatedBy = {
-		RangeValidatorByNumberByte.class,
-		RangeValidatorByNumberShort.class,
-		RangeValidatorByNumberInteger.class,
-		RangeValidatorByNumberLong.class,
-		RangeValidatorByNumberFloat.class,
-		RangeValidatorByNumberDouble.class,
-		RangeValidatorByNumberBigDecimal.class,
-		RangeValidatorByNumberBigInteger.class,
+		FromToValidatorByNumberByte.class,
+		FromToValidatorByNumberShort.class,
+		FromToValidatorByNumberInteger.class,
+		FromToValidatorByNumberLong.class,
+		FromToValidatorByNumberFloat.class,
+		FromToValidatorByNumberDouble.class,
+		FromToValidatorByNumberBigDecimal.class,
+		FromToValidatorByNumberBigInteger.class,
 
-		RangeValidatorByLocalDateTime.class,
-		RangeValidatorByLocalDate.class,
-		RangeValidatorByLocalTime.class,
-		RangeValidatorByCalendar.class,
-		RangeValidatorByDate.class
+		FromToValidatorByLocalDateTime.class,
+		FromToValidatorByLocalDate.class,
+		FromToValidatorByLocalTime.class,
+		FromToValidatorByCalendar.class,
+		FromToValidatorByDate.class
 
 })
-public @interface Range {
+public @interface FromTo {
 
-	String message() default "{com.example.spring.validation.fields.range.Range.message}";
+	String message() default "{com.example.spring.validation.fields.fromto.FromTo.message}";
 
 	String fieldFrom();
 
@@ -61,6 +61,6 @@ public @interface Range {
 	@Documented
 	@interface List {
 
-		Range[] value();
+		FromTo[] value();
 	}
 }

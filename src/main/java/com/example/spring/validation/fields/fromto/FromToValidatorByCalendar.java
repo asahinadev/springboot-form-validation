@@ -1,4 +1,4 @@
-package com.example.spring.validation.fields.range;
+package com.example.spring.validation.fields.fromto;
 
 import java.util.Calendar;
 
@@ -7,8 +7,8 @@ import org.slf4j.Logger;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class RangeValidatorByCalendar
-		extends RangeFormValidator<Calendar> {
+public class FromToValidatorByCalendar
+		extends FromToFormValidator<Calendar> {
 
 	@Override
 	Logger log() {

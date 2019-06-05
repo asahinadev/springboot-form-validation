@@ -1,4 +1,4 @@
-package com.example.spring.validation.fields.range;
+package com.example.spring.validation.fields.fromto;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -9,53 +9,31 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
-import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 
-import com.example.spring.form.Fields;
-import com.example.spring.form.FromTo;
+import com.example.spring.form.FromToType;
+import com.example.spring.validation.BasedValidator;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class RangePojoValidator implements ConstraintValidator<Range, Object> {
+public class FromToPojoValidator
+		extends BasedValidator<FromTo, Object> {
 
-	Range annotation;
+	FromTo annotation;
 
 	@Override
-	public void initialize(Range annotation) {
+	public void initialize(FromTo annotation) {
 
 		this.annotation = annotation;
 	}
 
-	@RequiredArgsConstructor
-	@SuppressWarnings("unchecked")
-	private static class CustomFieldsProperty<E> extends Fields<E> {
+	private <T extends Comparable<? super T>> FromToType<T> fromTo(Object arg0, Object arg1, Class<T> clazz) {
 
-		final Object field1;
-
-		final Object field2;
-
-		@Override
-		public E getField() {
-
-			return (E) field1;
-		}
-
-		@Override
-		public E getFieldConfime() {
-
-			return (E) field2;
-		}
-	}
-
-	private <T extends Comparable<? super T>> FromTo<T> fromTo(Object arg0, Object arg1, Class<T> clazz) {
-
-		return FromTo.<T>builder().from(clazz.cast(arg0)).to(clazz.cast(arg1)).build();
+		return FromToType.<T>builder().from(clazz.cast(arg0)).to(clazz.cast(arg1)).build();
 	}
 
 	@Override
@@ -76,79 +54,79 @@ public class RangePojoValidator implements ConstraintValidator<Range, Object> {
 			}
 
 			if (field1 instanceof Byte) {
-				RangeValidatorByNumberByte validator = new RangeValidatorByNumberByte();
+				FromToValidatorByNumberByte validator = new FromToValidatorByNumberByte();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, Byte.class), context);
 			}
 
 			if (field1 instanceof Short) {
-				RangeValidatorByNumberShort validator = new RangeValidatorByNumberShort();
+				FromToValidatorByNumberShort validator = new FromToValidatorByNumberShort();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, Short.class), context);
 			}
 
 			if (field1 instanceof Integer) {
-				RangeValidatorByNumberInteger validator = new RangeValidatorByNumberInteger();
+				FromToValidatorByNumberInteger validator = new FromToValidatorByNumberInteger();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, Integer.class), context);
 			}
 
 			if (field1 instanceof Long) {
-				RangeValidatorByNumberLong validator = new RangeValidatorByNumberLong();
+				FromToValidatorByNumberLong validator = new FromToValidatorByNumberLong();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, Long.class), context);
 			}
 
 			if (field1 instanceof Float) {
-				RangeValidatorByNumberFloat validator = new RangeValidatorByNumberFloat();
+				FromToValidatorByNumberFloat validator = new FromToValidatorByNumberFloat();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, Float.class), context);
 			}
 
 			if (field1 instanceof Double) {
-				RangeValidatorByNumberDouble validator = new RangeValidatorByNumberDouble();
+				FromToValidatorByNumberDouble validator = new FromToValidatorByNumberDouble();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, Double.class), context);
 			}
 
 			if (field1 instanceof BigInteger) {
-				RangeValidatorByNumberBigInteger validator = new RangeValidatorByNumberBigInteger();
+				FromToValidatorByNumberBigInteger validator = new FromToValidatorByNumberBigInteger();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, BigInteger.class), context);
 			}
 
 			if (field1 instanceof BigDecimal) {
-				RangeValidatorByNumberBigDecimal validator = new RangeValidatorByNumberBigDecimal();
+				FromToValidatorByNumberBigDecimal validator = new FromToValidatorByNumberBigDecimal();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, BigDecimal.class), context);
 			}
 
 			if (field1 instanceof Calendar) {
-				RangeValidatorByCalendar validator = new RangeValidatorByCalendar();
+				FromToValidatorByCalendar validator = new FromToValidatorByCalendar();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, Calendar.class), context);
 			}
 
 			if (field1 instanceof Date) {
-				RangeValidatorByDate validator = new RangeValidatorByDate();
+				FromToValidatorByDate validator = new FromToValidatorByDate();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, Date.class), context);
 			}
 
 			if (field1 instanceof LocalDateTime) {
-				RangeValidatorByLocalDateTime validator = new RangeValidatorByLocalDateTime();
+				FromToValidatorByLocalDateTime validator = new FromToValidatorByLocalDateTime();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, LocalDateTime.class), context);
 			}
 
 			if (field1 instanceof LocalDate) {
-				RangeValidatorByLocalDate validator = new RangeValidatorByLocalDate();
+				FromToValidatorByLocalDate validator = new FromToValidatorByLocalDate();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, LocalDate.class), context);
 			}
 
 			if (field1 instanceof LocalTime) {
-				RangeValidatorByLocalTime validator = new RangeValidatorByLocalTime();
+				FromToValidatorByLocalTime validator = new FromToValidatorByLocalTime();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, LocalTime.class), context);
 			}

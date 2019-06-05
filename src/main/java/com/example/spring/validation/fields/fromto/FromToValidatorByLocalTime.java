@@ -1,4 +1,4 @@
-package com.example.spring.validation.fields.range;
+package com.example.spring.validation.fields.fromto;
 
 import java.time.LocalTime;
 
@@ -7,10 +7,8 @@ import org.slf4j.Logger;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class RangeValidatorByLocalTime
-		extends RangeFormValidator<LocalTime> {
-
-	Range annotation;
+public class FromToValidatorByLocalTime
+		extends FromToFormValidator<LocalTime> {
 
 	@Override
 	Logger log() {
