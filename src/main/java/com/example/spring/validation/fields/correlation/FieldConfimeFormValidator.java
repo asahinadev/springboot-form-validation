@@ -5,24 +5,24 @@ import java.util.Objects;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.example.spring.validation.fields.property.FieldsProperty;
+import com.example.spring.config.Fieldset;
 
-public class FieldsEqualsValidator implements ConstraintValidator<FieldsEquals, FieldsProperty<?>> {
-	FieldsEquals annotation;
+public class ConfimeFormValidator implements ConstraintValidator<Confime, Fieldset<?>> {
+	Confime annotation;
 
 	@Override
-	public void initialize(FieldsEquals annotation) {
+	public void initialize(Confime annotation) {
 		this.annotation = annotation;
 	}
 
 	@Override
-	public boolean isValid(FieldsProperty<?> form, ConstraintValidatorContext context) {
+	public boolean isValid(Fieldset<?> form, ConstraintValidatorContext context) {
 		if (form == null) {
 			return true;
 		}
 
-		Object field1 = form.getMain();
-		Object field2 = form.getSub();
+		Object field1 = form.getField();
+		Object field2 = form.getFieldConfime();
 
 		if (Objects.equals(field1, field2)) {
 			return true;
@@ -30,7 +30,7 @@ public class FieldsEqualsValidator implements ConstraintValidator<FieldsEquals, 
 
 		context.disableDefaultConstraintViolation();
 		context.buildConstraintViolationWithTemplate(annotation.message())
-				.addPropertyNode(annotation.fieldSub())
+				.addPropertyNode(annotation.fieldConfime())
 				.addConstraintViolation();
 
 		return false;
