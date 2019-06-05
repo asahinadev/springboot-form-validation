@@ -14,25 +14,35 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
+import javax.validation.OverridesAttribute;
 import javax.validation.Payload;
+import javax.validation.constraints.Pattern;
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = AsciiValidator.class)
+@Constraint(validatedBy = {
+})
 @Repeatable(Ascii.List.class)
 @Documented
+@Pattern(regexp = "^[\\p{Print}]*$")
 public @interface Ascii {
 
+	@OverridesAttribute(constraint = Pattern.class, name = "message")
 	String message() default "{com.example.spring.validation.characters.Ascii.message}";
 
-	Class<?>[] groups() default {};
+	Class<?>[] groups() default {
+			// default empty
+	};
 
-	Class<? extends Payload>[] payload() default {};
+	Class<? extends Payload>[] payload() default {
+			// default empty
+	};
 
 	@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 	@Retention(RetentionPolicy.RUNTIME)
 	@Documented
 	public @interface List {
+
 		Ascii[] value();
 	}
 }

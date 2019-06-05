@@ -14,27 +14,35 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
+import javax.validation.OverridesAttribute;
 import javax.validation.Payload;
+import javax.validation.constraints.Pattern;
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = {
-		AlphaLowerCaseValidator.class
 })
-@Repeatable(AlphaLowerCase.List.class)
+@Repeatable(UpperCase.List.class)
 @Documented
-public @interface AlphaLowerCase {
+@Pattern(regexp = "^[\\p{Lower}]*$")
+public @interface UpperCase {
 
-	String message() default "{com.example.spring.validation.characters.AlphaLowerCase.message}";
+	@OverridesAttribute(constraint = Pattern.class, name = "message")
+	String message() default "{com.example.spring.validation.characters.UpperCase.message}";
 
-	Class<?>[] groups() default {};
+	Class<?>[] groups() default {
+			// default empty
+	};
 
-	Class<? extends Payload>[] payload() default {};
+	Class<? extends Payload>[] payload() default {
+			// default empty
+	};
 
 	@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 	@Retention(RetentionPolicy.RUNTIME)
 	@Documented
 	public @interface List {
-		AlphaLowerCase[] value();
+
+		UpperCase[] value();
 	}
 }

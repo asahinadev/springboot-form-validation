@@ -15,12 +15,15 @@ import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
+import javax.validation.constraints.Pattern;
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = AlphanumValidator.class)
+@Constraint(validatedBy = {
+})
 @Repeatable(Alphanum.List.class)
 @Documented
+@Pattern(regexp = "^[\\p{Alnum}]*$")
 public @interface Alphanum {
 
 	String message() default "{com.example.spring.validation.characters.Alphanum.message}";
@@ -33,6 +36,7 @@ public @interface Alphanum {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Documented
 	public @interface List {
+
 		Alphanum[] value();
 	}
 }
