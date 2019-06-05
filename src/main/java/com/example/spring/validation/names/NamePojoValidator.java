@@ -1,14 +1,14 @@
 package com.example.spring.validation.names;
 
-import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
 
 import com.example.spring.form.NameType;
+import com.example.spring.validation.BasedValidator;
 
-public class NamePojoValidator implements ConstraintValidator<Name, Object> {
+public class NamePojoValidator
+		extends BasedValidator<Name, Object> {
 
 	Name annotation;
 
@@ -25,13 +25,15 @@ public class NamePojoValidator implements ConstraintValidator<Name, Object> {
 			return true;
 		}
 
-		BeanWrapper form = new BeanWrapperImpl(value);
+		BeanWrapper form = form(value);
 		NameFormValidator validator = new NameFormValidator();
 		validator.initialize(annotation);
 
-		return validator.isValid(new NameType(
-				(String) form.getPropertyValue(annotation.fieldFirstName()),
-				(String) form.getPropertyValue(annotation.fieldLastName())), context);
+		return validator.isValid(
+				new NameType(
+						property(form, annotation.fieldFirstName()),
+						property(form, annotation.fieldLastName())),
+				context);
 	}
 
 }
