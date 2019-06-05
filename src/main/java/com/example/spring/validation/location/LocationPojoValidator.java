@@ -1,14 +1,14 @@
 package com.example.spring.validation.location;
 
-import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
 
-import com.example.spring.form.LatLng;
+import com.example.spring.form.LocationType;
+import com.example.spring.validation.BasedValidator;
 
-public class LocationPojoValidator implements ConstraintValidator<Location, Object> {
+public class LocationPojoValidator
+		extends BasedValidator<Location, Object> {
 
 	Location annotation;
 
@@ -25,13 +25,15 @@ public class LocationPojoValidator implements ConstraintValidator<Location, Obje
 			return true;
 		}
 
-		BeanWrapper form = new BeanWrapperImpl(value);
+		BeanWrapper form = form(value);
 		LocationFormValidator validator = new LocationFormValidator();
 		validator.initialize(annotation);
 
-		return validator.isValid(new LatLng(
-				(Double) form.getPropertyValue(annotation.fieldLat()),
-				(Double) form.getPropertyValue(annotation.fieldLng())), context);
+		return validator.isValid(
+				new LocationType(
+						property(form, annotation.fieldLat()),
+						property(form, annotation.fieldLng())),
+				context);
 	}
 
 }
