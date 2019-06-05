@@ -37,7 +37,7 @@ public class AlphaUpperCaseTest extends SpringParameterized {
 	@Data
 	@Builder
 	public static class Form {
-		@AlphaUpperCase
+		@UpperCase
 		String value;
 	}
 
