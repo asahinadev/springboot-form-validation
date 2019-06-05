@@ -17,13 +17,10 @@ public class WebConfig implements WebMvcConfigurer {
 	@Autowired
 	MessageSource messageSource;
 
+	@Bean
 	@Override
 	public Validator getValidator() {
-		return validator();
-	}
 
-	@Bean
-	public Validator validator() {
 		LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
 		validator.setValidationMessageSource(messageSource);
 		log.debug("messageSource {}", messageSource);
