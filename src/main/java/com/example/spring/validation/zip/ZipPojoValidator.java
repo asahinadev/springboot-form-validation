@@ -1,14 +1,14 @@
 package com.example.spring.validation.zip;
 
-import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
 
-import com.example.spring.form.ZipCode;
+import com.example.spring.form.ZipType;
+import com.example.spring.validation.BasedValidator;
 
-public class ZipPojoValidator implements ConstraintValidator<Zip, Object> {
+public class ZipPojoValidator
+		extends BasedValidator<Zip, Object> {
 
 	Zip annotation;
 
@@ -25,13 +25,16 @@ public class ZipPojoValidator implements ConstraintValidator<Zip, Object> {
 			return true;
 		}
 
-		BeanWrapper form = new BeanWrapperImpl(value);
+		BeanWrapper form = form(value);
+
 		ZipFormValidator validator = new ZipFormValidator();
 		validator.initialize(annotation);
 
-		return validator.isValid(new ZipCode(
-				(String) form.getPropertyValue(annotation.fieldZip1()),
-				(String) form.getPropertyValue(annotation.fieldZip2())), context);
+		return validator.isValid(
+				new ZipType(
+						property(form, annotation.fieldZip1()),
+						property(form, annotation.fieldZip2())),
+				context);
 	}
 
 }

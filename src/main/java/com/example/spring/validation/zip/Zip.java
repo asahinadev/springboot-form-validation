@@ -39,7 +39,7 @@ public @interface Zip {
 
 	public static final int TEL_2_MAX_LENGTH = 4;
 
-	String message() default "{com.example.spring.validation.phone.Dn.message}";
+	String message() default "{com.example.spring.validation.zip.Zip.message}";
 
 	String fieldZip1() default "zip1";
 
