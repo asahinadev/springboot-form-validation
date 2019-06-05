@@ -1,6 +1,7 @@
 package com.example.spring.validation;
 
 import java.lang.annotation.Annotation;
+import java.util.Arrays;
 import java.util.Objects;
 
 import javax.validation.ConstraintValidator;
@@ -77,6 +78,50 @@ public abstract class BasedValidator<A extends Annotation, T>
 			builder.addConstraintViolation();
 		}
 		return false;
+	}
+
+	protected boolean allows(String field, String value, String[] allows, String message,
+			ConstraintValidatorContext context) {
+
+		// 許可された文字列
+		if (allows.length != 0 && !Arrays.asList(allows).contains(value)) {
+			error(field, context, message);
+			throw new RuntimeException(field);
+		}
+		return true;
+	}
+
+	protected boolean denied(String field, String value, String[] denied, String message,
+			ConstraintValidatorContext context) {
+
+		// 許可されていない文字列
+		if (denied.length != 0 && Arrays.asList(denied).contains(value)) {
+			error(field, context, message);
+			throw new RuntimeException(field);
+		}
+		return true;
+	}
+
+	protected boolean startsWith(String field, String value, String prefix, String message,
+			ConstraintValidatorContext context) {
+
+		// 許可された文字列
+		if (!value.startsWith(prefix)) {
+			error(field, context, message);
+			throw new RuntimeException(field);
+		}
+		return true;
+	}
+
+	protected boolean endsWith(String field, String value, String suffix, String message,
+			ConstraintValidatorContext context) {
+
+		// 許可された文字列
+		if (!value.endsWith(suffix)) {
+			error(field, context, message);
+			throw new RuntimeException(field);
+		}
+		return true;
 	}
 
 }
