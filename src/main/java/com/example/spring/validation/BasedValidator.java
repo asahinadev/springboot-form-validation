@@ -7,10 +7,16 @@ import java.util.Objects;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import javax.validation.ConstraintValidatorContext.ConstraintViolationBuilder;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.internal.constraintvalidators.bv.NotNullValidator;
 import org.hibernate.validator.internal.constraintvalidators.bv.notempty.NotEmptyValidatorForCharSequence;
+import org.hibernate.validator.internal.constraintvalidators.bv.number.bound.MaxValidatorForDouble;
+import org.hibernate.validator.internal.constraintvalidators.bv.number.bound.MinValidatorForDouble;
 import org.hibernate.validator.internal.constraintvalidators.hv.LengthValidator;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
@@ -68,16 +74,37 @@ public abstract class BasedValidator<A extends Annotation, T>
 		throw new RuntimeException(field);
 	}
 
-	protected boolean error(String field, ConstraintValidatorContext context, String message) {
+	protected void notNullValidator(String field, Object value, NotNull notNull, ConstraintValidatorContext context) {
 
-		context.disableDefaultConstraintViolation();
-		ConstraintViolationBuilder builder = context.buildConstraintViolationWithTemplate(message);
-		if (field != null) {
-			builder.addPropertyNode(field).addConstraintViolation();
-		} else {
-			builder.addConstraintViolation();
+		NotNullValidator validator = new NotNullValidator();
+		validator.initialize(notNull);
+
+		if (!validator.isValid(value, context)) {
+			error(field, context, notNull.message());
+			throw new RuntimeException(field);
 		}
-		return false;
+	}
+
+	protected void minValidator(String field, Double value, Min min, ConstraintValidatorContext context) {
+
+		MinValidatorForDouble validator = new MinValidatorForDouble();
+		validator.initialize(min);
+
+		if (!validator.isValid(value, context)) {
+			error(field, context, min.message());
+			throw new RuntimeException(field);
+		}
+	}
+
+	protected void maxValidator(String field, Double value, Max max, ConstraintValidatorContext context) {
+
+		MaxValidatorForDouble validator = new MaxValidatorForDouble();
+		validator.initialize(max);
+
+		if (!validator.isValid(value, context)) {
+			error(field, context, max.message());
+			throw new RuntimeException(field);
+		}
 	}
 
 	protected boolean allows(String field, String value, String[] allows, String message,
@@ -124,4 +151,15 @@ public abstract class BasedValidator<A extends Annotation, T>
 		return true;
 	}
 
+	protected boolean error(String field, ConstraintValidatorContext context, String message) {
+
+		context.disableDefaultConstraintViolation();
+		ConstraintViolationBuilder builder = context.buildConstraintViolationWithTemplate(message);
+		if (field != null) {
+			builder.addPropertyNode(field).addConstraintViolation();
+		} else {
+			builder.addConstraintViolation();
+		}
+		return false;
+	}
 }
