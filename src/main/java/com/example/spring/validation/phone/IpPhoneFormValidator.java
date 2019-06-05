@@ -1,11 +1,12 @@
 package com.example.spring.validation.phone;
 
-import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.example.spring.form.Phone;
+import com.example.spring.form.PhoneType;
+import com.example.spring.validation.BasedValidator;
 
-public class IpPhoneFormValidator implements ConstraintValidator<IpPhone, Phone> {
+public class IpPhoneFormValidator
+		extends BasedValidator<IpPhone, PhoneType> {
 
 	IpPhone annotation;
 
@@ -16,7 +17,7 @@ public class IpPhoneFormValidator implements ConstraintValidator<IpPhone, Phone>
 	}
 
 	@Override
-	public boolean isValid(Phone form, ConstraintValidatorContext context) {
+	public boolean isValid(PhoneType form, ConstraintValidatorContext context) {
 
 		if (form == null) {
 			return true;

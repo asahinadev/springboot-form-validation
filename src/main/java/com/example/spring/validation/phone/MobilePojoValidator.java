@@ -1,14 +1,14 @@
 package com.example.spring.validation.phone;
 
-import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
 
-import com.example.spring.form.Phone;
+import com.example.spring.form.PhoneType;
+import com.example.spring.validation.BasedValidator;
 
-public class MobilePojoValidator implements ConstraintValidator<Mobile, Object> {
+public class MobilePojoValidator
+		extends BasedValidator<Mobile, Object> {
 
 	Mobile annotation;
 
@@ -25,14 +25,16 @@ public class MobilePojoValidator implements ConstraintValidator<Mobile, Object> 
 			return true;
 		}
 
-		BeanWrapper form = new BeanWrapperImpl(value);
-		MobileValidator validator = new MobileValidator();
+		BeanWrapper form = form(value);
+		MobileFormValidator validator = new MobileFormValidator();
 		validator.initialize(annotation);
 
-		return validator.isValid(new Phone(
-				(String) form.getPropertyValue(annotation.fieldTel1()),
-				(String) form.getPropertyValue(annotation.fieldTel2()),
-				(String) form.getPropertyValue(annotation.fieldTel3())), context);
+		return validator.isValid(
+				new PhoneType(
+						property(form, annotation.fieldTel1()),
+						property(form, annotation.fieldTel2()),
+						property(form, annotation.fieldTel3())),
+				context);
 	}
 
 }

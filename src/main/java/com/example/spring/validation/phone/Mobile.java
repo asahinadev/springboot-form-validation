@@ -28,7 +28,7 @@ import com.example.spring.validation.characters.Numeric;
 @Repeatable(Mobile.List.class)
 @Documented
 @Constraint(validatedBy = {
-		MobileValidator.class,
+		MobileFormValidator.class,
 		MobilePojoValidator.class
 })
 @Dn

@@ -1,11 +1,12 @@
 package com.example.spring.validation.phone;
 
-import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.example.spring.form.Phone;
+import com.example.spring.form.PhoneType;
+import com.example.spring.validation.BasedValidator;
 
-public class MobileValidator implements ConstraintValidator<Mobile, Phone> {
+public class MobileFormValidator
+		extends BasedValidator<Mobile, PhoneType> {
 
 	Mobile annotation;
 
@@ -16,7 +17,7 @@ public class MobileValidator implements ConstraintValidator<Mobile, Phone> {
 	}
 
 	@Override
-	public boolean isValid(Phone form, ConstraintValidatorContext context) {
+	public boolean isValid(PhoneType form, ConstraintValidatorContext context) {
 
 		if (form == null) {
 			return true;
