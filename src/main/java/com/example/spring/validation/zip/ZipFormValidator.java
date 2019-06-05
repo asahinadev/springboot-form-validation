@@ -35,8 +35,8 @@ public class ZipFormValidator implements ConstraintValidator<Zip, ZipCode> {
 			return true;
 		}
 
-		String tel1 = form.getZip1();
-		String tel2 = form.getZip2();
+		String zip1 = form.getZip1();
+		String zip2 = form.getZip2();
 
 		String fieldZip1 = annotation.fieldZip1();
 		String fieldZip2 = annotation.fieldZip2();
@@ -44,22 +44,22 @@ public class ZipFormValidator implements ConstraintValidator<Zip, ZipCode> {
 		try {
 			do {
 
-				if (StringUtils.isAllEmpty(tel1, tel2)) {
-					log.debug("tel is empty");
+				if (StringUtils.isAllEmpty(zip1, zip2)) {
+					log.debug("zip is empty");
 					return true;
 				}
 
 				// 必須チェック
-				notEmptyValidator(fieldZip1, tel1, annotation.notEmptyZip1(), context);
-				notEmptyValidator(fieldZip2, tel2, annotation.notEmptyZip2(), context);
+				notEmptyValidator(fieldZip1, zip1, annotation.notEmptyZip1(), context);
+				notEmptyValidator(fieldZip2, zip2, annotation.notEmptyZip2(), context);
 
 				// 数値チェック
-				numericValidator(fieldZip1, tel1, annotation.numericZip1(), context);
-				numericValidator(fieldZip2, tel2, annotation.numericZip2(), context);
+				numericValidator(fieldZip1, zip1, annotation.numericZip1(), context);
+				numericValidator(fieldZip2, zip2, annotation.numericZip2(), context);
 
 				// 桁数チェック
-				lengthValidator(fieldZip1, tel1, annotation.lengthZip1(), context);
-				lengthValidator(fieldZip2, tel2, annotation.lengthZip2(), context);
+				lengthValidator(fieldZip1, zip1, annotation.lengthZip1(), context);
+				lengthValidator(fieldZip2, zip2, annotation.lengthZip2(), context);
 
 			} while (false);
 		} catch (RuntimeException e) {
