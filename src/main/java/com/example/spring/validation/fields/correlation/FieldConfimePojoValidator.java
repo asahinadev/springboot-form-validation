@@ -8,11 +8,11 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 
-public class ConfimePojoValidator implements ConstraintValidator<Confime, Object> {
-	Confime annotation;
+public class FieldConfimePojoValidator implements ConstraintValidator<FieldConfime, Object> {
+	FieldConfime annotation;
 
 	@Override
-	public void initialize(Confime annotation) {
+	public void initialize(FieldConfime annotation) {
 		this.annotation = annotation;
 	}
 

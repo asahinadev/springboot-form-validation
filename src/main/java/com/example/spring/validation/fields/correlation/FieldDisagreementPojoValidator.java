@@ -8,11 +8,11 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 
-public class FieldsNotEqualsPojoValidator implements ConstraintValidator<FieldsNotEquals, Object> {
-	FieldsNotEquals annotation;
+public class FieldDisagreementPojoValidator implements ConstraintValidator<FieldDisagreement, Object> {
+	FieldDisagreement annotation;
 
 	@Override
-	public void initialize(FieldsNotEquals annotation) {
+	public void initialize(FieldDisagreement annotation) {
 		this.annotation = annotation;
 	}
 
@@ -24,8 +24,8 @@ public class FieldsNotEqualsPojoValidator implements ConstraintValidator<FieldsN
 
 		BeanWrapper formWrapper = new BeanWrapperImpl(form);
 
-		Object field1 = formWrapper.getPropertyValue(annotation.fieldMain());
-		Object field2 = formWrapper.getPropertyValue(annotation.fieldSub());
+		Object field1 = formWrapper.getPropertyValue(annotation.field());
+		Object field2 = formWrapper.getPropertyValue(annotation.fieldConfime());
 
 		if (!Objects.equals(field1, field2)) {
 			return true;
@@ -33,7 +33,7 @@ public class FieldsNotEqualsPojoValidator implements ConstraintValidator<FieldsN
 
 		context.disableDefaultConstraintViolation();
 		context.buildConstraintViolationWithTemplate(annotation.message())
-				.addPropertyNode(annotation.fieldSub())
+				.addPropertyNode(annotation.fieldConfime())
 				.addConstraintViolation();
 
 		return false;

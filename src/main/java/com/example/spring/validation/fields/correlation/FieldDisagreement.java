@@ -18,19 +18,19 @@ import javax.validation.Payload;
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 @Retention(RUNTIME)
-@Repeatable(FieldsNotEquals.List.class)
+@Repeatable(FieldDisagreement.List.class)
 @Documented
 @Constraint(validatedBy = {
-		FieldsEqualsValidator.class,
-		FieldsEqualsPojoValidator.class
+		FieldConfimeFormValidator.class,
+		FieldConfimePojoValidator.class
 })
-public @interface FieldsNotEquals {
+public @interface FieldDisagreement {
 
-	String message() default "{com.example.spring.validation.fields.correlation.FieldsNotEquals.message}";
+	String message() default "{com.example.spring.validation.fields.correlation.FieldDisagreement.message}";
 
-	String fieldMain();
+	String field();
 
-	String fieldSub();
+	String fieldConfime();
 
 	Class<?>[] groups() default {};
 
@@ -46,6 +46,6 @@ public @interface FieldsNotEquals {
 	@Documented
 	@interface List {
 
-		FieldsNotEquals[] value();
+		FieldDisagreement[] value();
 	}
 }

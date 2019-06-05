@@ -5,18 +5,18 @@ import java.util.Objects;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.example.spring.config.Fieldset;
+import com.example.spring.form.Fields;
 
-public class ConfimeFormValidator implements ConstraintValidator<Confime, Fieldset<?>> {
-	Confime annotation;
+public class FieldConfimeFormValidator implements ConstraintValidator<FieldConfime, Fields<?>> {
+	FieldConfime annotation;
 
 	@Override
-	public void initialize(Confime annotation) {
+	public void initialize(FieldConfime annotation) {
 		this.annotation = annotation;
 	}
 
 	@Override
-	public boolean isValid(Fieldset<?> form, ConstraintValidatorContext context) {
+	public boolean isValid(Fields<?> form, ConstraintValidatorContext context) {
 		if (form == null) {
 			return true;
 		}

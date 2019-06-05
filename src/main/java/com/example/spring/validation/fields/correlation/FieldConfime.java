@@ -18,15 +18,15 @@ import javax.validation.Payload;
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 @Retention(RUNTIME)
-@Repeatable(Confime.List.class)
+@Repeatable(FieldConfime.List.class)
 @Documented
 @Constraint(validatedBy = {
-		ConfimeFormValidator.class,
-		ConfimePojoValidator.class
+		FieldConfimeFormValidator.class,
+		FieldConfimePojoValidator.class
 })
-public @interface Confime {
+public @interface FieldConfime {
 
-	String message() default "{com.example.spring.validation.fields.correlation.Confime.message}";
+	String message() default "{com.example.spring.validation.fields.correlation.FieldConfime.message}";
 
 	String field();
 
@@ -46,6 +46,6 @@ public @interface Confime {
 	@Documented
 	@interface List {
 
-		Confime[] value();
+		FieldConfime[] value();
 	}
 }
