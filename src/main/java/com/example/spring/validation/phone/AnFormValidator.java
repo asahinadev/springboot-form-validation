@@ -5,12 +5,12 @@ import javax.validation.ConstraintValidatorContext;
 
 import com.example.spring.form.Phone;
 
-public class MobileValidator implements ConstraintValidator<Mobile, Phone> {
+public class AnFormValidator implements ConstraintValidator<An, Phone> {
 
-	Mobile annotation;
+	An annotation;
 
 	@Override
-	public void initialize(Mobile annotation) {
+	public void initialize(An annotation) {
 
 		this.annotation = annotation;
 	}
@@ -22,7 +22,7 @@ public class MobileValidator implements ConstraintValidator<Mobile, Phone> {
 			return true;
 		}
 
-		// 携帯電話 特有チェック追加用
+		// an 特有チェック追加用
 
 		return true;
 	}

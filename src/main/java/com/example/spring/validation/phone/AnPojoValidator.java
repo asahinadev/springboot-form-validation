@@ -8,12 +8,12 @@ import org.springframework.beans.BeanWrapperImpl;
 
 import com.example.spring.form.Phone;
 
-public class IpPhonePojoValidator implements ConstraintValidator<IpPhone, Object> {
+public class AnPojoValidator implements ConstraintValidator<An, Object> {
 
-	IpPhone annotation;
+	An annotation;
 
 	@Override
-	public void initialize(IpPhone annotation) {
+	public void initialize(An annotation) {
 
 		this.annotation = annotation;
 	}
@@ -26,7 +26,7 @@ public class IpPhonePojoValidator implements ConstraintValidator<IpPhone, Object
 		}
 
 		BeanWrapper form = new BeanWrapperImpl(value);
-		IpPhoneFormValidator validator = new IpPhoneFormValidator();
+		AnFormValidator validator = new AnFormValidator();
 		validator.initialize(annotation);
 
 		return validator.isValid(new Phone(

@@ -31,49 +31,81 @@ import com.example.spring.validation.characters.Numeric;
 		MobileValidator.class,
 		MobilePojoValidator.class
 })
-@Telephone(
-		lengthTel1 = @Length(min = 3, max = 3),
-		lengthTel2 = @Length(min = 4, max = 4),
-		lengthTel3 = @Length(min = 4, max = 4),
-		lengthTelEntire = @Length(min = 11, max = 11))
+@Dn
 public @interface Mobile {
 
-	String message() default "{com.example.spring.validation.phone.Mobile.message}";
+	public static final int TEL_1_MIN_LENGTH = 3;
 
-	@OverridesAttribute(constraint = Telephone.class, name = "fieldTel1")
-	String fieldTel1();
+	public static final int TEL_1_MAX_LENGTH = 3;
 
-	@OverridesAttribute(constraint = Telephone.class, name = "fieldTel2")
-	String fieldTel2();
+	public static final int TEL_2_MIN_LENGTH = 4;
 
-	@OverridesAttribute(constraint = Telephone.class, name = "fieldTel3")
-	String fieldTel3();
+	public static final int TEL_2_MAX_LENGTH = 4;
 
-	@OverridesAttribute(constraint = Telephone.class, name = "notEmptyTel1")
+	public static final int TEL_3_MIN_LENGTH = 4;
+
+	public static final int TEL_3_MAX_LENGTH = 4;
+
+	public static final int TEL_MIN_LENGTH = 11;
+
+	public static final int TEL_MAX_LENGTH = 11;
+
+	@OverridesAttribute(constraint = Dn.class, name = "message")
+	String message() default "{com.example.spring.validation.phone.An.message}";
+
+	@OverridesAttribute(constraint = Dn.class, name = "fieldTel1")
+	String fieldTel1() default "tel1";
+
+	@OverridesAttribute(constraint = Dn.class, name = "fieldTel2")
+	String fieldTel2() default "tel2";
+
+	@OverridesAttribute(constraint = Dn.class, name = "fieldTel3")
+	String fieldTel3() default "tel3";
+
+	@OverridesAttribute(constraint = Dn.class, name = "lengthTel1")
+	Length lengthTel1() default @Length(min = TEL_1_MIN_LENGTH, max = TEL_1_MAX_LENGTH);
+
+	@OverridesAttribute(constraint = Dn.class, name = "lengthTel2")
+	Length lengthTel2() default @Length(min = TEL_2_MIN_LENGTH, max = TEL_2_MAX_LENGTH);
+
+	@OverridesAttribute(constraint = Dn.class, name = "lengthTel3")
+	Length lengthTel3() default @Length(min = TEL_3_MIN_LENGTH, max = TEL_3_MAX_LENGTH);
+
+	@OverridesAttribute(constraint = Dn.class, name = "lengthTelEntire")
+	Length lengthTel() default @Length(min = TEL_MIN_LENGTH, max = TEL_MAX_LENGTH);
+
+	@OverridesAttribute(constraint = Dn.class, name = "notEmptyTel1")
 	NotEmpty notEmptyTel1() default @NotEmpty();
 
-	@OverridesAttribute(constraint = Telephone.class, name = "notEmptyTel2")
+	@OverridesAttribute(constraint = Dn.class, name = "notEmptyTel2")
 	NotEmpty notEmptyTel2() default @NotEmpty();
 
-	@OverridesAttribute(constraint = Telephone.class, name = "notEmptyTel3")
+	@OverridesAttribute(constraint = Dn.class, name = "notEmptyTel3")
 	NotEmpty notEmptyTel3() default @NotEmpty();
 
-	@OverridesAttribute(constraint = Telephone.class, name = "numericTel1")
+	@OverridesAttribute(constraint = Dn.class, name = "numericTel1")
 	Numeric numericTel1() default @Numeric();
 
-	@OverridesAttribute(constraint = Telephone.class, name = "numericTel2")
+	@OverridesAttribute(constraint = Dn.class, name = "numericTel2")
 	Numeric numericTel2() default @Numeric();
 
-	@OverridesAttribute(constraint = Telephone.class, name = "numericTel3")
+	@OverridesAttribute(constraint = Dn.class, name = "numericTel3")
 	Numeric numericTel3() default @Numeric();
 
+	@OverridesAttribute(constraint = Dn.class, name = "allowTel1")
 	String[] allowTel1() default {
 			"070", "080", "090"
 	};
 
-	Class<?>[] groups() default {};
+	@OverridesAttribute(constraint = Dn.class, name = "denyTel1")
+	String[] denyTel1() default {
+	};
 
-	Class<? extends Payload>[] payload() default {};
+	Class<?>[] groups() default {
+	};
+
+	Class<? extends Payload>[] payload() default {
+	};
 
 	/**
 	 * Defines several {@link NotNull} annotations on the same element.

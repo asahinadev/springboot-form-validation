@@ -23,15 +23,31 @@ import com.example.spring.validation.characters.Numeric;
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 @Retention(RUNTIME)
-@Repeatable(Telephone.List.class)
+@Repeatable(Dn.List.class)
 @Documented
 @Constraint(validatedBy = {
-		TelephoneValidator.class,
-		TelephonePojoValidator.class
+		DnFormValidator.class,
+		DnPojoValidator.class
 })
-public @interface Telephone {
+public @interface Dn {
 
-	String message() default "{com.example.spring.validation.phone.Telephone.message}";
+	public static final int TEL_1_MIN_LENGTH = 2;
+
+	public static final int TEL_1_MAX_LENGTH = 5;
+
+	public static final int TEL_2_MIN_LENGTH = 1;
+
+	public static final int TEL_2_MAX_LENGTH = 4;
+
+	public static final int TEL_3_MIN_LENGTH = 4;
+
+	public static final int TEL_3_MAX_LENGTH = 4;
+
+	public static final int TEL_MIN_LENGTH = 10;
+
+	public static final int TEL_MAX_LENGTH = 11;
+
+	String message() default "{com.example.spring.validation.phone.Dn.message}";
 
 	String fieldTel1() default "tel1";
 
@@ -39,13 +55,13 @@ public @interface Telephone {
 
 	String fieldTel3() default "tel3";
 
-	Length lengthTel1() default @Length(min = 2, max = 5);
+	Length lengthTel1() default @Length(min = TEL_1_MIN_LENGTH, max = TEL_1_MAX_LENGTH);
 
-	Length lengthTel2() default @Length(min = 1, max = 4);
+	Length lengthTel2() default @Length(min = TEL_2_MIN_LENGTH, max = TEL_2_MAX_LENGTH);
 
-	Length lengthTel3() default @Length(min = 4, max = 4);
+	Length lengthTel3() default @Length(min = TEL_3_MIN_LENGTH, max = TEL_3_MAX_LENGTH);
 
-	Length lengthTelEntire() default @Length(min = 10, max = 11);
+	Length lengthTel() default @Length(min = TEL_MIN_LENGTH, max = TEL_MAX_LENGTH);
 
 	NotEmpty notEmptyTel1() default @NotEmpty();
 
@@ -59,20 +75,24 @@ public @interface Telephone {
 
 	Numeric numericTel3() default @Numeric();
 
-	Class<?>[] groups() default {};
+	String[] allowTel1() default {
+	};
 
-	Class<? extends Payload>[] payload() default {};
+	String[] denyTel1() default {
+	};
 
-	/**
-	 * Defines several {@link NotNull} annotations on the same element.
-	 *
-	 * @see javax.validation.constraints.NotNull
-	 */
+	Class<?>[] groups() default {
+	};
+
+	Class<? extends Payload>[] payload() default {
+
+	};
+
 	@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 	@Retention(RUNTIME)
 	@Documented
 	@interface List {
 
-		Telephone[] value();
+		Dn[] value();
 	}
 }

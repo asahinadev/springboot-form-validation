@@ -24,30 +24,30 @@ import com.example.spring.validation.characters.Numeric;
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 @Retention(RUNTIME)
-@Repeatable(IpPhone.List.class)
+@Repeatable(An.List.class)
 @Documented
 @Constraint(validatedBy = {
 		MobileValidator.class,
 		MobilePojoValidator.class
 })
 @Dn
-public @interface IpPhone {
+public @interface An {
 
-	public static final int TEL_1_MIN_LENGTH = 3;
+	public static final int TEL_1_MIN_LENGTH = 4;
 
-	public static final int TEL_1_MAX_LENGTH = 3;
+	public static final int TEL_1_MAX_LENGTH = 4;
 
-	public static final int TEL_2_MIN_LENGTH = 4;
+	public static final int TEL_2_MIN_LENGTH = 1;
 
-	public static final int TEL_2_MAX_LENGTH = 4;
+	public static final int TEL_2_MAX_LENGTH = 5;
 
-	public static final int TEL_3_MIN_LENGTH = 4;
+	public static final int TEL_3_MIN_LENGTH = 1;
 
-	public static final int TEL_3_MAX_LENGTH = 4;
+	public static final int TEL_3_MAX_LENGTH = 5;
 
-	public static final int TEL_MIN_LENGTH = 11;
+	public static final int TEL_MIN_LENGTH = 10;
 
-	public static final int TEL_MAX_LENGTH = 11;
+	public static final int TEL_MAX_LENGTH = 10;
 
 	@OverridesAttribute(constraint = Dn.class, name = "message")
 	String message() default "{com.example.spring.validation.phone.An.message}";
@@ -93,7 +93,7 @@ public @interface IpPhone {
 
 	@OverridesAttribute(constraint = Dn.class, name = "allowTel1")
 	String[] allowTel1() default {
-			"050"
+			"0120", "0570", "0800"
 	};
 
 	@OverridesAttribute(constraint = Dn.class, name = "denyTel1")
@@ -111,6 +111,6 @@ public @interface IpPhone {
 	@Documented
 	@interface List {
 
-		IpPhone[] value();
+		An[] value();
 	}
 }
