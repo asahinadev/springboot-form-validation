@@ -14,7 +14,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
-import javax.validation.OverridesAttribute;
 import javax.validation.Payload;
 import javax.validation.constraints.Email;
 
@@ -28,8 +27,9 @@ public @interface MobileMail {
 
 	String message() default "{com.example.spring.validation.email.MobileMail.message}";
 
-	@OverridesAttribute(constraint = Email.class, name = "message")
-	String messageEmail() default "{javax.validation.constraints.Email.message}";
+	String[] allows() default {};
+
+	String[] denied() default {};
 
 	Class<?>[] groups() default {};
 
@@ -39,6 +39,7 @@ public @interface MobileMail {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Documented
 	public @interface List {
+
 		MobileMail[] value();
 	}
 }

@@ -16,6 +16,7 @@ public class MobileMailValidator
 
 	@Override
 	public void initialize(MobileMail annotation) {
+
 		this.annotation = annotation;
 	}
 
@@ -26,15 +27,39 @@ public class MobileMailValidator
 			return true;
 		}
 
+		if (!StringUtils.contains(value, "@")) {
+			return true;
+		}
+
 		for (String domain : mobileMailConfig.denied) {
-			if (value.endsWith(domain)) {
+			String target = value.substring(value.length() - domain.length());
+
+			if (StringUtils.equals(target, domain)) {
+				return false;
+			}
+		}
+
+		for (String domain : annotation.denied()) {
+			String target = value.substring(value.length() - domain.length());
+
+			if (StringUtils.equals(target, domain)) {
 				return false;
 			}
 		}
 
 		for (String domain : mobileMailConfig.allows) {
-			if (value.endsWith(domain)) {
-				return true;
+			String target = value.substring(value.length() - domain.length());
+
+			if (StringUtils.equals(target, domain)) {
+				return false;
+			}
+		}
+
+		for (String domain : annotation.allows()) {
+			String target = value.substring(value.length() - domain.length());
+
+			if (StringUtils.equals(target, domain)) {
+				return false;
 			}
 		}
 

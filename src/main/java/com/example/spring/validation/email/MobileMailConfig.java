@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Configuration
-@ConfigurationProperties("app.validation.email")
+@ConfigurationProperties("com.example.spring.validation.email")
 public class MobileMailConfig {
 
 	String[] allows;
