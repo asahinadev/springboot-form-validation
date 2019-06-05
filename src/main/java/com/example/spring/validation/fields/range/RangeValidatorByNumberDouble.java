@@ -5,8 +5,8 @@ import org.slf4j.Logger;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class FieldsRangeDoubleValidator
-		extends FieldsRangeComparableValidator<Double> {
+public class RangeValidatorByNumberDouble
+		extends RangeFormValidator<Double> {
 
 	@Override
 	Logger log() {

@@ -1,12 +1,14 @@
 package com.example.spring.validation.fields.range;
 
+import java.util.Date;
+
 import org.slf4j.Logger;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class FieldsRangeByteValidator
-		extends FieldsRangeComparableValidator<Byte> {
+public class RangeValidatorByDate
+		extends RangeFormValidator<Date> {
 
 	@Override
 	Logger log() {

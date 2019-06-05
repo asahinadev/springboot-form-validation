@@ -18,28 +18,28 @@ import javax.validation.Payload;
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 @Retention(RUNTIME)
-@Repeatable(FieldsRange.List.class)
+@Repeatable(Range.List.class)
 @Documented
 @Constraint(validatedBy = {
-		FieldsRangeByteValidator.class,
-		FieldsRangeShortValidator.class,
-		FieldsRangeIntegerValidator.class,
-		FieldsRangeLongValidator.class,
-		FieldsRangeFloatValidator.class,
-		FieldsRangeDoubleValidator.class,
-		FieldsRangeBigDecimalValidator.class,
-		FieldsRangeBigIntegerValidator.class,
+		RangeValidatorByNumberByte.class,
+		RangeValidatorByNumberShort.class,
+		RangeValidatorByNumberInteger.class,
+		RangeValidatorByNumberLong.class,
+		RangeValidatorByNumberFloat.class,
+		RangeValidatorByNumberDouble.class,
+		RangeValidatorByNumberBigDecimal.class,
+		RangeValidatorByNumberBigInteger.class,
 
-		FieldsRangeLocalDateTimeValidator.class,
-		FieldsRangeLocalDateValidator.class,
-		FieldsRangeLocalTimeValidator.class,
-		FieldsRangeCalendarValidator.class,
-		FieldsRangeDateValidator.class
+		RangeValidatorByLocalDateTime.class,
+		RangeValidatorByLocalDate.class,
+		RangeValidatorByLocalTime.class,
+		RangeValidatorByCalendar.class,
+		RangeValidatorByDate.class
 
 })
-public @interface FieldsRange {
+public @interface Range {
 
-	String message() default "{com.example.spring.validation.fields.range.FieldsRange.message}";
+	String message() default "{com.example.spring.validation.fields.range.Range.message}";
 
 	String fieldFrom();
 
@@ -61,6 +61,6 @@ public @interface FieldsRange {
 	@Documented
 	@interface List {
 
-		FieldsRange[] value();
+		Range[] value();
 	}
 }

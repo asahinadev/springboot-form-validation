@@ -7,27 +7,30 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.slf4j.Logger;
 
-import com.example.spring.validation.fields.property.FieldsProperty;
+import com.example.spring.form.FromTo;
 
-public abstract class FieldsRangeComparableValidator<E extends Comparable<E>>
-		implements ConstraintValidator<FieldsRange, FieldsProperty<E>> {
-	FieldsRange annotation;
+public abstract class RangeFormValidator<E extends Comparable<? super E>>
+		implements ConstraintValidator<Range, FromTo<E>> {
+
+	Range annotation;
 
 	@Override
-	public void initialize(FieldsRange annotation) {
+	public void initialize(Range annotation) {
+
 		this.annotation = annotation;
 	}
 
 	abstract Logger log();
 
 	@Override
-	public boolean isValid(FieldsProperty<E> form, ConstraintValidatorContext context) {
+	public boolean isValid(FromTo<E> form, ConstraintValidatorContext context) {
+
 		if (form == null) {
 			return true;
 		}
 
-		E field1 = form.getMain();
-		E field2 = form.getSub();
+		E field1 = form.getFrom();
+		E field2 = form.getTo();
 
 		do {
 			if (Objects.isNull(field1)) {
