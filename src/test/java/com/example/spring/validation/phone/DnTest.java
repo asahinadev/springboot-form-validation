@@ -28,7 +28,7 @@ public class DnTest
 	public static List<ParameterBase<PhoneType>> data() {
 
 		List<ParameterBase<PhoneType>> list = new ArrayList<>();
-
+		list.add(new ParameterBase<>(null,0));
 		list.add(new ParameterBase<>(
 				PhoneType.builder().tel1("").tel2("").tel3("").build(), 0));
 
