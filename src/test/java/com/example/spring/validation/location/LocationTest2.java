@@ -10,9 +10,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.example.spring.SpringParameterized;
-import com.example.spring.form.LocationType;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @ActiveProfiles("test")
@@ -21,11 +24,11 @@ import lombok.RequiredArgsConstructor;
 })
 @RunWith(Parameterized.class)
 @SpringBootTest
-public class LocationTest
-		extends SpringParameterized<LocationTest.Form, LocationType> {
+public class LocationTest2
+		extends SpringParameterized<LocationTest2.Form, LocationTest2.LocationType> {
 
 	@Parameterized.Parameters
-	public static List<ParameterBase<LocationType>> data() {
+	public static List<ParameterBase<LocationTest2.LocationType>> data() {
 
 		Double latMin = Double.valueOf(Location.JP_LAT_MIN);
 		Double latMax = Double.valueOf(Location.JP_LAT_MAX);
@@ -33,38 +36,50 @@ public class LocationTest
 		Double lngMin = Double.valueOf(Location.JP_LNG_MIN);
 		Double lngMax = Double.valueOf(Location.JP_LNG_MAX);
 
-		List<ParameterBase<LocationType>> list = new ArrayList<>();
+		List<ParameterBase<LocationTest2.LocationType>> list = new ArrayList<>();
 
 		list.add(new ParameterBase<>(null, 0));
 		list.add(new ParameterBase<>(
-				LocationType.builder().lat(null).lng(lngMax).build(), 1));
+				LocationTest2.LocationType.builder().lat(null).lng(lngMax).build(), 1));
 		list.add(new ParameterBase<>(
-				LocationType.builder().lat(latMax).lng(null).build(), 1));
+				LocationTest2.LocationType.builder().lat(latMax).lng(null).build(), 1));
 
 		list.add(new ParameterBase<>(
-				LocationType.builder().lat(latMin).lng(lngMin).build(), 0));
+				LocationTest2.LocationType.builder().lat(latMin).lng(lngMin).build(), 0));
 		list.add(new ParameterBase<>(
-				LocationType.builder().lat(latMin).lng(lngMax).build(), 0));
+				LocationTest2.LocationType.builder().lat(latMin).lng(lngMax).build(), 0));
 		list.add(new ParameterBase<>(
-				LocationType.builder().lat(latMax).lng(lngMin).build(), 0));
+				LocationTest2.LocationType.builder().lat(latMax).lng(lngMin).build(), 0));
 		list.add(new ParameterBase<>(
-				LocationType.builder().lat(latMax).lng(lngMax).build(), 0));
+				LocationTest2.LocationType.builder().lat(latMax).lng(lngMax).build(), 0));
 
 		list.add(new ParameterBase<>(
-				LocationType.builder().lat(latMin).lng(lngMin - 1D).build(), 1));
+				LocationTest2.LocationType.builder().lat(latMin).lng(lngMin - 1D).build(), 1));
 		list.add(new ParameterBase<>(
-				LocationType.builder().lat(latMin - 1D).lng(lngMax).build(), 1));
+				LocationTest2.LocationType.builder().lat(latMin - 1D).lng(lngMax).build(), 1));
 		list.add(new ParameterBase<>(
-				LocationType.builder().lat(latMax + 1D).lng(lngMin).build(), 1));
+				LocationTest2.LocationType.builder().lat(latMax + 1D).lng(lngMin).build(), 1));
 		list.add(new ParameterBase<>(
-				LocationType.builder().lat(latMax).lng(lngMax + 1D).build(), 1));
+				LocationTest2.LocationType.builder().lat(latMax).lng(lngMax + 1D).build(), 1));
 
 		return list;
 	}
 
-	public LocationTest(ParameterBase<LocationType> parameter) {
+	public LocationTest2(ParameterBase<LocationTest2.LocationType> parameter) {
 
 		super(parameter);
+	}
+
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	@Builder
+	public static class LocationType {
+
+		Double lat;
+
+		Double lng;
+
 	}
 
 	@Getter
@@ -72,7 +87,7 @@ public class LocationTest
 	public static class Form {
 
 		@Location
-		final LocationType value;
+		final LocationTest2.LocationType value;
 	}
 
 	@Override
