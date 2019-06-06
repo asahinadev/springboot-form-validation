@@ -39,7 +39,7 @@ public @interface Name {
 
 	String message() default "{com.example.spring.validation.names.Name.message}";
 
-	String fieldFirstName() default "firsetName";
+	String fieldFirstName() default "firstName";
 
 	String fieldLastName() default "lastName";
 

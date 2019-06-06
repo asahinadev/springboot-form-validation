@@ -21,8 +21,8 @@ import lombok.RequiredArgsConstructor;
 })
 @RunWith(Parameterized.class)
 @SpringBootTest
-public class LocationTest extends
-		SpringParameterized<LocationTest.Form, LocationType> {
+public class LocationTest
+		extends SpringParameterized<LocationTest.Form, LocationType> {
 
 	@Parameterized.Parameters
 	public static List<ParameterBase<LocationType>> data() {
