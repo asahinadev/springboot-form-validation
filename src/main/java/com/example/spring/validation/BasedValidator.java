@@ -7,6 +7,8 @@ import java.util.Objects;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import javax.validation.ConstraintValidatorContext.ConstraintViolationBuilder;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -17,6 +19,8 @@ import org.hibernate.validator.internal.constraintvalidators.bv.NotNullValidator
 import org.hibernate.validator.internal.constraintvalidators.bv.notempty.NotEmptyValidatorForCharSequence;
 import org.hibernate.validator.internal.constraintvalidators.bv.number.bound.MaxValidatorForDouble;
 import org.hibernate.validator.internal.constraintvalidators.bv.number.bound.MinValidatorForDouble;
+import org.hibernate.validator.internal.constraintvalidators.bv.number.bound.decimal.DecimalMaxValidatorForDouble;
+import org.hibernate.validator.internal.constraintvalidators.bv.number.bound.decimal.DecimalMinValidatorForDouble;
 import org.hibernate.validator.internal.constraintvalidators.hv.LengthValidator;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
@@ -99,6 +103,28 @@ public abstract class BasedValidator<A extends Annotation, T>
 	protected void maxValidator(String field, Double value, Max max, ConstraintValidatorContext context) {
 
 		MaxValidatorForDouble validator = new MaxValidatorForDouble();
+		validator.initialize(max);
+
+		if (!validator.isValid(value, context)) {
+			error(field, context, max.message());
+			throw new RuntimeException(field);
+		}
+	}
+
+	protected void minValidator(String field, Double value, DecimalMin min, ConstraintValidatorContext context) {
+
+		DecimalMinValidatorForDouble validator = new DecimalMinValidatorForDouble();
+		validator.initialize(min);
+
+		if (!validator.isValid(value, context)) {
+			error(field, context, min.message());
+			throw new RuntimeException(field);
+		}
+	}
+
+	protected void maxValidator(String field, Double value, DecimalMax max, ConstraintValidatorContext context) {
+
+		DecimalMaxValidatorForDouble validator = new DecimalMaxValidatorForDouble();
 		validator.initialize(max);
 
 		if (!validator.isValid(value, context)) {

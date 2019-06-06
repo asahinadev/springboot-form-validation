@@ -15,8 +15,8 @@ import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
@@ -29,23 +29,31 @@ import javax.validation.constraints.NotNull;
 })
 public @interface Location {
 
+	public static final String JP_LAT_MIN = "20";
+
+	public static final String JP_LAT_MAX = "46";
+
+	public static final String JP_LNG_MIN = "122";
+
+	public static final String JP_LNG_MAX = "154";
+
 	String message() default "{com.example.spring.validation.location.Location.message}";
 
-	String fieldLat() default "zip1";
+	String fieldLat() default "lat";
 
-	String fieldLng() default "zip2";
+	String fieldLng() default "lng";
 
 	NotNull notNullLat() default @NotNull();
 
 	NotNull notNullLng() default @NotNull();
 
-	Min minLat() default @Min(20);
+	DecimalMin minLat() default @DecimalMin(value = JP_LAT_MIN);
 
-	Min minLng() default @Min(122);
+	DecimalMin minLng() default @DecimalMin(value = JP_LNG_MIN);
 
-	Max maxLat() default @Max(46);
+	DecimalMax maxLat() default @DecimalMax(value = JP_LAT_MAX);
 
-	Max maxLng() default @Max(154);
+	DecimalMax maxLng() default @DecimalMax(value = JP_LNG_MAX);
 
 	Class<?>[] groups() default {
 	};
