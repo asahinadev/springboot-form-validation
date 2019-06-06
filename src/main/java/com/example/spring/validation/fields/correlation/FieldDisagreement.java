@@ -21,16 +21,16 @@ import javax.validation.Payload;
 @Repeatable(FieldDisagreement.List.class)
 @Documented
 @Constraint(validatedBy = {
-		FieldConfimeFormValidator.class,
-		FieldConfimePojoValidator.class
+		FieldDisagreementFormValidator.class,
+		FieldDisagreementPojoValidator.class
 })
 public @interface FieldDisagreement {
 
 	String message() default "{com.example.spring.validation.fields.correlation.FieldDisagreement.message}";
 
-	String field();
+	String field() default "field";
 
-	String fieldConfime();
+	String fieldConfime() default "fieldConfime";
 
 	Class<?>[] groups() default {};
 

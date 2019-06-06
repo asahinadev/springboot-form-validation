@@ -28,9 +28,9 @@ public @interface FieldConfime {
 
 	String message() default "{com.example.spring.validation.fields.correlation.FieldConfime.message}";
 
-	String field();
+	String field() default "field";
 
-	String fieldConfime();
+	String fieldConfime() default "fieldConfime";
 
 	Class<?>[] groups() default {};
 
