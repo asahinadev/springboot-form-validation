@@ -12,6 +12,7 @@ public class FromToValidatorByNumberBigDecimal
 
 	@Override
 	Logger log() {
+
 		return log;
 	}
 

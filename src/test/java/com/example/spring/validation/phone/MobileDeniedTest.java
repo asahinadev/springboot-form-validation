@@ -28,7 +28,7 @@ public class MobileDeniedTest
 	public static List<ParameterBase<PhoneType>> data() {
 
 		List<ParameterBase<PhoneType>> list = new ArrayList<>();
-		list.add(new ParameterBase<>(null,0));
+		list.add(new ParameterBase<>(null, 0));
 		list.add(new ParameterBase<>(
 				PhoneType.builder().tel1("070").tel2("1234").tel3("1234").build(), 1));
 		list.add(new ParameterBase<>(

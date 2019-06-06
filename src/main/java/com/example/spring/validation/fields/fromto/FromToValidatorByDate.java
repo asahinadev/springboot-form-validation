@@ -12,6 +12,7 @@ public class FromToValidatorByDate
 
 	@Override
 	Logger log() {
+
 		return log;
 	}
 

@@ -28,7 +28,7 @@ public class AnDeniedTest
 	public static List<ParameterBase<PhoneType>> data() {
 
 		List<ParameterBase<PhoneType>> list = new ArrayList<>();
-		list.add(new ParameterBase<>(null,0));
+		list.add(new ParameterBase<>(null, 0));
 		list.add(new ParameterBase<>(
 				PhoneType.builder().tel1("0120").tel2("123").tel3("123").build(), 0));
 		list.add(new ParameterBase<>(

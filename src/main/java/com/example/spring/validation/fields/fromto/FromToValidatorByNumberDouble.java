@@ -10,6 +10,7 @@ public class FromToValidatorByNumberDouble
 
 	@Override
 	Logger log() {
+
 		return log;
 	}
 

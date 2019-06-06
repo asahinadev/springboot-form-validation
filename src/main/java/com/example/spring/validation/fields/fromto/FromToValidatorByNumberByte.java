@@ -10,6 +10,7 @@ public class FromToValidatorByNumberByte
 
 	@Override
 	Logger log() {
+
 		return log;
 	}
 

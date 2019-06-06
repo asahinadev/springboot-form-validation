@@ -10,6 +10,7 @@ public class FromToValidatorByNumberShort
 
 	@Override
 	Logger log() {
+
 		return log;
 	}
 

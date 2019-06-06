@@ -10,6 +10,7 @@ public class FromToValidatorByNumberInteger
 
 	@Override
 	Logger log() {
+
 		return log;
 	}
 

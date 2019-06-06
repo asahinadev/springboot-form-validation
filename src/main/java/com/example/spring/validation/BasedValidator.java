@@ -8,8 +8,6 @@ import javax.validation.ConstraintValidatorContext;
 import javax.validation.ConstraintValidatorContext.ConstraintViolationBuilder;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -17,8 +15,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.internal.constraintvalidators.bv.NotNullValidator;
 import org.hibernate.validator.internal.constraintvalidators.bv.notempty.NotEmptyValidatorForCharSequence;
-import org.hibernate.validator.internal.constraintvalidators.bv.number.bound.MaxValidatorForDouble;
-import org.hibernate.validator.internal.constraintvalidators.bv.number.bound.MinValidatorForDouble;
 import org.hibernate.validator.internal.constraintvalidators.bv.number.bound.decimal.DecimalMaxValidatorForDouble;
 import org.hibernate.validator.internal.constraintvalidators.bv.number.bound.decimal.DecimalMinValidatorForDouble;
 import org.hibernate.validator.internal.constraintvalidators.hv.LengthValidator;
@@ -66,14 +62,11 @@ public abstract class BasedValidator<A extends Annotation, T>
 
 	protected void numericValidator(String field, String value, Numeric numeric, ConstraintValidatorContext context) {
 
-		try {
-			boolean check = StringUtils.isNumeric(value) && StringUtils.isAsciiPrintable(value);
-			if (check) {
-				return;
-			}
-		} catch (Exception e) {
-
+		boolean check = StringUtils.isNumeric(value) && StringUtils.isAsciiPrintable(value);
+		if (check) {
+			return;
 		}
+
 		error(field, context, numeric.message());
 		throw new RuntimeException(field);
 	}
@@ -89,27 +82,27 @@ public abstract class BasedValidator<A extends Annotation, T>
 		}
 	}
 
-	protected void minValidator(String field, Double value, Min min, ConstraintValidatorContext context) {
-
-		MinValidatorForDouble validator = new MinValidatorForDouble();
-		validator.initialize(min);
-
-		if (!validator.isValid(value, context)) {
-			error(field, context, min.message());
-			throw new RuntimeException(field);
-		}
-	}
-
-	protected void maxValidator(String field, Double value, Max max, ConstraintValidatorContext context) {
-
-		MaxValidatorForDouble validator = new MaxValidatorForDouble();
-		validator.initialize(max);
-
-		if (!validator.isValid(value, context)) {
-			error(field, context, max.message());
-			throw new RuntimeException(field);
-		}
-	}
+	//	protected void minValidator(String field, Double value, Min min, ConstraintValidatorContext context) {
+	//
+	//		MinValidatorForDouble validator = new MinValidatorForDouble();
+	//		validator.initialize(min);
+	//
+	//		if (!validator.isValid(value, context)) {
+	//			error(field, context, min.message());
+	//			throw new RuntimeException(field);
+	//		}
+	//	}
+	//
+	//	protected void maxValidator(String field, Double value, Max max, ConstraintValidatorContext context) {
+	//
+	//		MaxValidatorForDouble validator = new MaxValidatorForDouble();
+	//		validator.initialize(max);
+	//
+	//		if (!validator.isValid(value, context)) {
+	//			error(field, context, max.message());
+	//			throw new RuntimeException(field);
+	//		}
+	//	}
 
 	protected void minValidator(String field, Double value, DecimalMin min, ConstraintValidatorContext context) {
 
@@ -166,16 +159,16 @@ public abstract class BasedValidator<A extends Annotation, T>
 		return true;
 	}
 
-	protected boolean endsWith(String field, String value, String suffix, String message,
-			ConstraintValidatorContext context) {
-
-		// 許可された文字列
-		if (!value.endsWith(suffix)) {
-			error(field, context, message);
-			throw new RuntimeException(field);
-		}
-		return true;
-	}
+	//	protected boolean endsWith(String field, String value, String suffix, String message,
+	//			ConstraintValidatorContext context) {
+	//
+	//		// 許可された文字列
+	//		if (!value.endsWith(suffix)) {
+	//			error(field, context, message);
+	//			throw new RuntimeException(field);
+	//		}
+	//		return true;
+	//	}
 
 	protected boolean error(String field, ConstraintValidatorContext context, String message) {
 

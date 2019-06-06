@@ -25,10 +25,6 @@ public abstract class FromToFormValidator<E extends Comparable<? super E>>
 	@Override
 	public boolean isValid(FromToType<E> form, ConstraintValidatorContext context) {
 
-		if (form == null) {
-			return true;
-		}
-
 		E field1 = form.getFrom();
 		E field2 = form.getTo();
 

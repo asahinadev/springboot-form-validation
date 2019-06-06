@@ -3,9 +3,11 @@ package com.example.spring.validation.email;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Configuration
 @ConfigurationProperties("com.example.spring.validation.email")
 public class MobileMailConfig {
