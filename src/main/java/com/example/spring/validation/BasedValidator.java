@@ -2,7 +2,6 @@ package com.example.spring.validation;
 
 import java.lang.annotation.Annotation;
 import java.util.Arrays;
-import java.util.Objects;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -14,6 +13,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.internal.constraintvalidators.bv.NotNullValidator;
 import org.hibernate.validator.internal.constraintvalidators.bv.notempty.NotEmptyValidatorForCharSequence;
@@ -67,7 +67,7 @@ public abstract class BasedValidator<A extends Annotation, T>
 	protected void numericValidator(String field, String value, Numeric numeric, ConstraintValidatorContext context) {
 
 		try {
-			boolean check = Objects.equals(value, Integer.valueOf(value).toString());
+			boolean check = StringUtils.isNumeric(value) && StringUtils.isAsciiPrintable(value);
 			if (check) {
 				return;
 			}

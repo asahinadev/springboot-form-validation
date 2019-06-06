@@ -27,8 +27,8 @@ import com.example.spring.validation.characters.Numeric;
 @Repeatable(An.List.class)
 @Documented
 @Constraint(validatedBy = {
-		MobileFormValidator.class,
-		MobilePojoValidator.class
+		AnFormValidator.class,
+		AnPojoValidator.class
 })
 @Dn
 public @interface An {
@@ -70,7 +70,7 @@ public @interface An {
 	@OverridesAttribute(constraint = Dn.class, name = "lengthTel3")
 	Length lengthTel3() default @Length(min = TEL_3_MIN_LENGTH, max = TEL_3_MAX_LENGTH);
 
-	@OverridesAttribute(constraint = Dn.class, name = "lengthTelEntire")
+	@OverridesAttribute(constraint = Dn.class, name = "lengthTel")
 	Length lengthTel() default @Length(min = TEL_MIN_LENGTH, max = TEL_MAX_LENGTH);
 
 	@OverridesAttribute(constraint = Dn.class, name = "notEmptyTel1")
