@@ -43,6 +43,8 @@ public class LocationTest2
 				LocationTest2.LocationType.builder().lat(null).lng(lngMax).build(), 1));
 		list.add(new ParameterBase<>(
 				LocationTest2.LocationType.builder().lat(latMax).lng(null).build(), 1));
+		list.add(new ParameterBase<>(
+				LocationType.builder().lat(null).lng(null).build(), 0));
 
 		list.add(new ParameterBase<>(
 				LocationTest2.LocationType.builder().lat(latMin).lng(lngMin).build(), 0));

@@ -40,6 +40,8 @@ public class LocationTest
 				LocationType.builder().lat(null).lng(lngMax).build(), 1));
 		list.add(new ParameterBase<>(
 				LocationType.builder().lat(latMax).lng(null).build(), 1));
+		list.add(new ParameterBase<>(
+				LocationType.builder().lat(null).lng(null).build(), 0));
 
 		list.add(new ParameterBase<>(
 				LocationType.builder().lat(latMin).lng(lngMin).build(), 0));
