@@ -1,6 +1,6 @@
 package com.example.spring.validation.fields.fromto;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,23 +19,26 @@ import com.example.spring.form.FromToType;
 @RunWith(Parameterized.class)
 @SpringBootTest
 public class FromToByLocalTimeTest2
-		extends BasedFromToTest<LocalDateTime> {
+		extends BasedFromToTest<LocalTime> {
 
 	@Parameterized.Parameters
-	public static List<ParameterBase<FromToType<LocalDateTime>>> data() {
+	public static List<ParameterBase<FromToType<LocalTime>>> data() {
 
-		LocalDateTime c1 = LocalDateTime.now();
-		LocalDateTime c2 = LocalDateTime.now().plusDays(1);
+		LocalTime c1 = LocalTime.now();
+		LocalTime c2 = LocalTime.now().plusHours(1);
 
-		List<ParameterBase<FromToType<LocalDateTime>>> list = new ArrayList<>();
-		list.add(new ParameterBase<>(FromToType.<LocalDateTime>builder().from(c1).to(c1).build(), 0));
-		list.add(new ParameterBase<>(FromToType.<LocalDateTime>builder().from(c1).to(c2).build(), 0));
-		list.add(new ParameterBase<>(FromToType.<LocalDateTime>builder().from(c2).to(c1).build(), 1));
+		List<ParameterBase<FromToType<LocalTime>>> list = new ArrayList<>();
+		list.add(new ParameterBase<>(null, 0));
+		list.add(new ParameterBase<>(FromToType.<LocalTime>builder().from(c1).to(null).build(), 0));
+		list.add(new ParameterBase<>(FromToType.<LocalTime>builder().from(null).to(c2).build(), 0));
+		list.add(new ParameterBase<>(FromToType.<LocalTime>builder().from(c1).to(c1).build(), 0));
+		list.add(new ParameterBase<>(FromToType.<LocalTime>builder().from(c1).to(c2).build(), 0));
+		list.add(new ParameterBase<>(FromToType.<LocalTime>builder().from(c2).to(c1).build(), 1));
 
 		return list;
 	}
 
-	public FromToByLocalTimeTest2(ParameterBase<FromToType<LocalDateTime>> parameter) {
+	public FromToByLocalTimeTest2(ParameterBase<FromToType<LocalTime>> parameter) {
 
 		super(parameter);
 	}

@@ -27,6 +27,9 @@ public class FromToByShortTest
 		Short c2 = 1;
 
 		List<ParameterBase<FromToType<Short>>> list = new ArrayList<>();
+		list.add(new ParameterBase<>(null, 0));
+		list.add(new ParameterBase<>(FromToType.<Short>builder().from(c1).to(null).build(), 0));
+		list.add(new ParameterBase<>(FromToType.<Short>builder().from(null).to(c2).build(), 0));
 		list.add(new ParameterBase<>(FromToType.<Short>builder().from(c1).to(c1).build(), 0));
 		list.add(new ParameterBase<>(FromToType.<Short>builder().from(c1).to(c2).build(), 0));
 		list.add(new ParameterBase<>(FromToType.<Short>builder().from(c2).to(c1).build(), 1));

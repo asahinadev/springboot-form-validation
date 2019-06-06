@@ -27,6 +27,9 @@ public class FromToByDoubleTest2
 		Double c2 = 1D;
 
 		List<ParameterBase<FromToType<Double>>> list = new ArrayList<>();
+		list.add(new ParameterBase<>(null, 0));
+		list.add(new ParameterBase<>(FromToType.<Double>builder().from(c1).to(null).build(), 0));
+		list.add(new ParameterBase<>(FromToType.<Double>builder().from(null).to(c2).build(), 0));
 		list.add(new ParameterBase<>(FromToType.<Double>builder().from(c1).to(c1).build(), 1));
 		list.add(new ParameterBase<>(FromToType.<Double>builder().from(c1).to(c2).build(), 0));
 		list.add(new ParameterBase<>(FromToType.<Double>builder().from(c2).to(c1).build(), 1));

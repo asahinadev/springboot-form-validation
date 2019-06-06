@@ -27,6 +27,9 @@ public class FromToByLongTest
 		Long c2 = 1L;
 
 		List<ParameterBase<FromToType<Long>>> list = new ArrayList<>();
+		list.add(new ParameterBase<>(null, 0));
+		list.add(new ParameterBase<>(FromToType.<Long>builder().from(c1).to(null).build(), 0));
+		list.add(new ParameterBase<>(FromToType.<Long>builder().from(null).to(c2).build(), 0));
 		list.add(new ParameterBase<>(FromToType.<Long>builder().from(c1).to(c1).build(), 0));
 		list.add(new ParameterBase<>(FromToType.<Long>builder().from(c1).to(c2).build(), 0));
 		list.add(new ParameterBase<>(FromToType.<Long>builder().from(c2).to(c1).build(), 1));

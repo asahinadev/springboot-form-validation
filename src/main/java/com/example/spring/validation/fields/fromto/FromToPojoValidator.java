@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Objects;
 
 import javax.validation.ConstraintValidatorContext;
 
@@ -17,9 +16,6 @@ import org.springframework.beans.BeanWrapperImpl;
 import com.example.spring.form.FromToType;
 import com.example.spring.validation.BasedValidator;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 public class FromToPojoValidator
 		extends BasedValidator<FromTo, Object> {
 
@@ -48,84 +44,80 @@ public class FromToPojoValidator
 		Object field2 = formWrapper.getPropertyValue(annotation.fieldTo());
 
 		do {
-			if (Objects.isNull(field1)) {
-				log.debug("field1 : null");
-				return true;
-			}
 
-			if (field1 instanceof Byte) {
+			if (field1 instanceof Byte || field2 instanceof Byte) {
 				FromToValidatorByNumberByte validator = new FromToValidatorByNumberByte();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, Byte.class), context);
 			}
 
-			if (field1 instanceof Short) {
+			if (field1 instanceof Short || field2 instanceof Short) {
 				FromToValidatorByNumberShort validator = new FromToValidatorByNumberShort();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, Short.class), context);
 			}
 
-			if (field1 instanceof Integer) {
+			if (field1 instanceof Integer || field2 instanceof Integer) {
 				FromToValidatorByNumberInteger validator = new FromToValidatorByNumberInteger();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, Integer.class), context);
 			}
 
-			if (field1 instanceof Long) {
+			if (field1 instanceof Long || field2 instanceof Long) {
 				FromToValidatorByNumberLong validator = new FromToValidatorByNumberLong();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, Long.class), context);
 			}
 
-			if (field1 instanceof Float) {
+			if (field1 instanceof Float || field2 instanceof Float) {
 				FromToValidatorByNumberFloat validator = new FromToValidatorByNumberFloat();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, Float.class), context);
 			}
 
-			if (field1 instanceof Double) {
+			if (field1 instanceof Double || field2 instanceof Double) {
 				FromToValidatorByNumberDouble validator = new FromToValidatorByNumberDouble();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, Double.class), context);
 			}
 
-			if (field1 instanceof BigInteger) {
+			if (field1 instanceof BigInteger || field2 instanceof BigInteger) {
 				FromToValidatorByNumberBigInteger validator = new FromToValidatorByNumberBigInteger();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, BigInteger.class), context);
 			}
 
-			if (field1 instanceof BigDecimal) {
+			if (field1 instanceof BigDecimal || field2 instanceof BigDecimal) {
 				FromToValidatorByNumberBigDecimal validator = new FromToValidatorByNumberBigDecimal();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, BigDecimal.class), context);
 			}
 
-			if (field1 instanceof Calendar) {
+			if (field1 instanceof Calendar || field2 instanceof Calendar) {
 				FromToValidatorByCalendar validator = new FromToValidatorByCalendar();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, Calendar.class), context);
 			}
 
-			if (field1 instanceof Date) {
+			if (field1 instanceof Date || field2 instanceof Date) {
 				FromToValidatorByDate validator = new FromToValidatorByDate();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, Date.class), context);
 			}
 
-			if (field1 instanceof LocalDateTime) {
+			if (field1 instanceof LocalDateTime || field2 instanceof LocalDateTime) {
 				FromToValidatorByLocalDateTime validator = new FromToValidatorByLocalDateTime();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, LocalDateTime.class), context);
 			}
 
-			if (field1 instanceof LocalDate) {
+			if (field1 instanceof LocalDate || field2 instanceof LocalDate) {
 				FromToValidatorByLocalDate validator = new FromToValidatorByLocalDate();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, LocalDate.class), context);
 			}
 
-			if (field1 instanceof LocalTime) {
+			if (field1 instanceof LocalTime || field2 instanceof LocalTime) {
 				FromToValidatorByLocalTime validator = new FromToValidatorByLocalTime();
 				validator.initialize(annotation);
 				return validator.isValid(fromTo(field1, field2, LocalTime.class), context);
