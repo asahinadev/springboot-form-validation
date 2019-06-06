@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 })
 @RunWith(Parameterized.class)
 @SpringBootTest
-public class NumericTest extends SpringParameterized<NumericTest.Form> {
+public class NumericTest extends SpringParameterized<NumericTest.Form, String> {
 
 	@Parameterized.Parameters
 	public static List<Parameter> data() {

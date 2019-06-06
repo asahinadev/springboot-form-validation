@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 })
 @RunWith(Parameterized.class)
 @SpringBootTest
-public class AlphaLowerCaseTest extends SpringParameterized<AlphaLowerCaseTest.Form> {
+public class AlphaLowerCaseTest extends SpringParameterized<AlphaLowerCaseTest.Form, String> {
 
 	@Parameterized.Parameters
 	public static List<Parameter> data() {

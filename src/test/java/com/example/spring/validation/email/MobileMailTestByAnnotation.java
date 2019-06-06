@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 })
 @RunWith(Parameterized.class)
 @SpringBootTest
-public class MobileMailTestByAnnotation extends SpringParameterized<MobileMailTestByAnnotation.Form> {
+public class MobileMailTestByAnnotation extends SpringParameterized<MobileMailTestByAnnotation.Form, String> {
 
 	@Parameterized.Parameters
 	public static List<Parameter> data() {

@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public abstract class SpringParameterized<E> {
+public abstract class SpringParameterized<E, T> {
 
 	@ClassRule
 	public static final SpringClassRule RULE = new SpringClassRule();
@@ -35,9 +35,9 @@ public abstract class SpringParameterized<E> {
 	protected BindingResult result;
 
 	@RequiredArgsConstructor
-	public static class Parameter {
+	public static class ParameterBase<T> {
 
-		final public String value;
+		final public T value;
 
 		final public int errorCount;
 
@@ -49,9 +49,18 @@ public abstract class SpringParameterized<E> {
 		}
 	}
 
-	final protected Parameter parameter;
+	public static class Parameter extends ParameterBase<String> {
 
-	public SpringParameterized(Parameter parameter) {
+		public Parameter(String value, int errorCount) {
+
+			super(value, errorCount);
+		}
+
+	}
+
+	final protected ParameterBase<T> parameter;
+
+	public SpringParameterized(ParameterBase<T> parameter) {
 
 		this.parameter = parameter;
 	}

@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 })
 @RunWith(Parameterized.class)
 @SpringBootTest
-public class AsciiTest extends SpringParameterized<AsciiTest.Form> {
+public class AsciiTest extends SpringParameterized<AsciiTest.Form, String> {
 
 	@Parameterized.Parameters
 	public static List<Parameter> data() {
