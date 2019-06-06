@@ -10,9 +10,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.example.spring.SpringParameterized;
-import com.example.spring.form.ConfimeType;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @ActiveProfiles("test")
@@ -21,24 +24,37 @@ import lombok.RequiredArgsConstructor;
 })
 @RunWith(Parameterized.class)
 @SpringBootTest
-public class FieldDisagreementTest extends SpringParameterized<FieldDisagreementTest.Form, ConfimeType<String>> {
+public class FieldDisagreementTest2
+		extends SpringParameterized<FieldDisagreementTest2.Form, FieldDisagreementTest2.ConfimeType<String>> {
 
 	@Parameterized.Parameters
-	public static List<ParameterBase<ConfimeType<String>>> data() {
+	public static List<ParameterBase<FieldDisagreementTest2.ConfimeType<String>>> data() {
 
-		List<ParameterBase<ConfimeType<String>>> list = new ArrayList<>();
+		List<ParameterBase<FieldDisagreementTest2.ConfimeType<String>>> list = new ArrayList<>();
 		list.add(new ParameterBase<>(null, 0));
 		list.add(new ParameterBase<>(
-				ConfimeType.<String>builder().field("a").fieldConfime("a").build(), 1));
+				FieldDisagreementTest2.ConfimeType.<String>builder().field("a").fieldConfime("a").build(), 1));
 		list.add(new ParameterBase<>(
-				ConfimeType.<String>builder().field("a").fieldConfime("b").build(), 0));
+				FieldDisagreementTest2.ConfimeType.<String>builder().field("a").fieldConfime("b").build(), 0));
 
 		return list;
 	}
 
-	public FieldDisagreementTest(ParameterBase<ConfimeType<String>> parameter) {
+	public FieldDisagreementTest2(ParameterBase<FieldDisagreementTest2.ConfimeType<String>> parameter) {
 
 		super(parameter);
+	}
+
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	@Builder
+	public static class ConfimeType<E> {
+
+		E field;
+
+		E fieldConfime;
+
 	}
 
 	@Getter
@@ -46,7 +62,7 @@ public class FieldDisagreementTest extends SpringParameterized<FieldDisagreement
 	public static class Form {
 
 		@FieldDisagreement(field = "field", fieldConfime = "fieldConfime")
-		final ConfimeType<String> value;
+		final FieldDisagreementTest2.ConfimeType<String> value;
 	}
 
 	@Override
