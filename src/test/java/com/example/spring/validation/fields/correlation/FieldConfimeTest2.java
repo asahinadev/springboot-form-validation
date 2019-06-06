@@ -10,9 +10,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.example.spring.SpringParameterized;
-import com.example.spring.form.ConfimeType;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @ActiveProfiles("test")
@@ -21,24 +24,37 @@ import lombok.RequiredArgsConstructor;
 })
 @RunWith(Parameterized.class)
 @SpringBootTest
-public class FieldConfimeTest extends SpringParameterized<FieldConfimeTest.Form, ConfimeType<String>> {
+public class FieldConfimeTest2
+		extends SpringParameterized<FieldConfimeTest2.Form, FieldConfimeTest2.ConfimeType<String>> {
 
 	@Parameterized.Parameters
-	public static List<ParameterBase<ConfimeType<String>>> data() {
+	public static List<ParameterBase<FieldConfimeTest2.ConfimeType<String>>> data() {
 
-		List<ParameterBase<ConfimeType<String>>> list = new ArrayList<>();
+		List<ParameterBase<FieldConfimeTest2.ConfimeType<String>>> list = new ArrayList<>();
 		list.add(new ParameterBase<>(null, 0));
 		list.add(new ParameterBase<>(
-				ConfimeType.<String>builder().field("a").fieldConfime("a").build(), 0));
+				FieldConfimeTest2.ConfimeType.<String>builder().field("a").fieldConfime("a").build(), 0));
 		list.add(new ParameterBase<>(
-				ConfimeType.<String>builder().field("a").fieldConfime("b").build(), 1));
+				FieldConfimeTest2.ConfimeType.<String>builder().field("a").fieldConfime("b").build(), 1));
 
 		return list;
 	}
 
-	public FieldConfimeTest(ParameterBase<ConfimeType<String>> parameter) {
+	public FieldConfimeTest2(ParameterBase<FieldConfimeTest2.ConfimeType<String>> parameter) {
 
 		super(parameter);
+	}
+
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	@Builder
+	public static class ConfimeType<E> {
+
+		E field;
+
+		E fieldConfime;
+
 	}
 
 	@Getter
@@ -46,7 +62,7 @@ public class FieldConfimeTest extends SpringParameterized<FieldConfimeTest.Form,
 	public static class Form {
 
 		@FieldConfime(field = "field", fieldConfime = "fieldConfime")
-		final ConfimeType<String> value;
+		final FieldConfimeTest2.ConfimeType<String> value;
 	}
 
 	@Override
