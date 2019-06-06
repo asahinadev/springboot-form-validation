@@ -24,7 +24,7 @@ import javax.validation.constraints.Pattern;
 })
 @Repeatable(UpperCase.List.class)
 @Documented
-@Pattern(regexp = "^[\\p{Lower}]*$")
+@Pattern(regexp = "^[\\p{Upper}]*$")
 public @interface UpperCase {
 
 	@OverridesAttribute(constraint = Pattern.class, name = "message")

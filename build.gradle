@@ -15,9 +15,16 @@ configurations {
 	runtimeClasspath {
 		extendsFrom developmentOnly
 	}
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    testCompileOnly {
+        extendsFrom testAnnotationProcessor
+    }
+}
+
+test {
+    systemProperty 'spring.profiles.active', 'test'
 }
 
 repositories {
@@ -37,4 +44,6 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	testAnnotationProcessor  'org.projectlombok:lombok'
 }

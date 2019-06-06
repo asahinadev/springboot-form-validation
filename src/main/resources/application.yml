@@ -2,3 +2,7 @@ spring:
   messages:
     basename: "i18n/messages"
     encoding: "utf-8"
+
+logging:
+  level:    root: off
+    com.example.spring: DEBUG

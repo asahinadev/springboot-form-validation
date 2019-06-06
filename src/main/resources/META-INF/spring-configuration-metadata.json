@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "com.example.spring.validation.email",
+      "type": "com.example.spring.validation.email.MobileMailConfig",
+      "sourceType": "com.example.spring.validation.email.MobileMailConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "com.example.spring.validation.email.allows",
+      "type": "java.lang.String[]",
+      "sourceType": "com.example.spring.validation.email.MobileMailConfig"
+    },
+    {
+      "name": "com.example.spring.validation.email.denied",
+      "type": "java.lang.String[]",
+      "sourceType": "com.example.spring.validation.email.MobileMailConfig"
+    }
+  ],
+  "hints": []
+}
