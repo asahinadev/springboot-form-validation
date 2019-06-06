@@ -5,6 +5,7 @@ plugins {
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'jacoco'
 
 group = 'com.example.spring'
 version = '0.0.1'
@@ -25,6 +26,12 @@ configurations {
 
 test {
     systemProperty 'spring.profiles.active', 'test'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+    }
 }
 
 repositories {
