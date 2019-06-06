@@ -10,7 +10,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.example.spring.SpringParameterized;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -26,8 +25,11 @@ public class MobileMailTestByAnnotation extends SpringParameterized<MobileMailTe
 	public static List<Parameter> data() {
 
 		return Arrays.asList(
+				new Parameter("", 0),
 				new Parameter("ok@gmail.com", 0),
 				new Parameter("ok@sub.gmail.com", 0),
+				new Parameter("ok@sub.sub.gmail.com", 0),
+				new Parameter("ng@other.com", 1),
 				new Parameter("ng@x.gmail.com", 1));
 	}
 

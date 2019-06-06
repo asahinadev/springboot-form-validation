@@ -10,7 +10,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.example.spring.SpringParameterized;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -26,8 +25,12 @@ public class MobileMailTestByConfigure extends SpringParameterized<MobileMailTes
 	public static List<Parameter> data() {
 
 		return Arrays.asList(
+				new Parameter("", 0),
 				new Parameter("ok@gmail.com", 0),
 				new Parameter("ok@sub.gmail.com", 0),
+				new Parameter("ok@denyed.gmail.com", 1),
+				new Parameter("ok@sub.sub.gmail.com", 0),
+				new Parameter("ng@other.com", 1),
 				new Parameter("ng@x.gmail.com", 1));
 	}
 
@@ -40,7 +43,7 @@ public class MobileMailTestByConfigure extends SpringParameterized<MobileMailTes
 	@RequiredArgsConstructor
 	public static class Form {
 
-		@MobileMail()
+		@MobileMail(denied = "denyed.gmail.com")
 		final String value;
 	}
 
