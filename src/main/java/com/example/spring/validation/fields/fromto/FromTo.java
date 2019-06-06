@@ -21,29 +21,17 @@ import javax.validation.Payload;
 @Repeatable(FromTo.List.class)
 @Documented
 @Constraint(validatedBy = {
-		FromToValidatorByNumberByte.class,
-		FromToValidatorByNumberShort.class,
-		FromToValidatorByNumberInteger.class,
-		FromToValidatorByNumberLong.class,
-		FromToValidatorByNumberFloat.class,
-		FromToValidatorByNumberDouble.class,
-		FromToValidatorByNumberBigDecimal.class,
-		FromToValidatorByNumberBigInteger.class,
-
-		FromToValidatorByLocalDateTime.class,
-		FromToValidatorByLocalDate.class,
-		FromToValidatorByLocalTime.class,
-		FromToValidatorByCalendar.class,
-		FromToValidatorByDate.class
+		// 条件判断を任せる
+		FromToPojoValidator.class
 
 })
 public @interface FromTo {
 
 	String message() default "{com.example.spring.validation.fields.fromto.FromTo.message}";
 
-	String fieldFrom();
+	String fieldFrom() default "from";
 
-	String fieldTo();
+	String fieldTo() default "to";
 
 	boolean hasEquals() default true;
 
