@@ -69,6 +69,10 @@ public abstract class SpringParameterized<E, T> {
 	public void setUp() throws Exception {
 
 		log.info("parameter {}", parameter);
+		if (parameter != null) {
+			log.info("parameter.value      {}", parameter.value);
+			log.info("parameter.errorCount {}", parameter.errorCount);
+		}
 	}
 
 	@Test
