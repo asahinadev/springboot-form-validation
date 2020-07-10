@@ -1,42 +1,32 @@
 package com.example.spring.validation.characters;
 
-import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
-import static java.lang.annotation.ElementType.CONSTRUCTOR;
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.PARAMETER;
-import static java.lang.annotation.ElementType.TYPE_USE;
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.RetentionPolicy.*;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Repeatable;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
-import javax.validation.constraints.Pattern;
+import javax.validation.*;
+import javax.validation.constraints.*;
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
-@Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = {
-})
-@Repeatable(Alphanum.List.class)
+@Retention(RUNTIME)
+@Constraint(validatedBy = {})
+@Repeatable(AlphaNumeric.List.class)
 @Documented
 @Pattern(regexp = "^[\\p{Alnum}]*$")
-public @interface Alphanum {
+public @interface AlphaNumeric {
 
-	String message() default "{com.example.spring.validation.characters.Alphanum.message}";
+	@OverridesAttribute(constraint = Pattern.class)
+	String message() default "{com.example.spring.validation.characters.AlphaNumeric.message}";
 
 	Class<?>[] groups() default {};
 
 	Class<? extends Payload>[] payload() default {};
 
 	@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
-	@Retention(RetentionPolicy.RUNTIME)
+	@Retention(RUNTIME)
 	@Documented
 	public @interface List {
-
-		Alphanum[] value();
+		AlphaNumeric[] value();
 	}
 }
