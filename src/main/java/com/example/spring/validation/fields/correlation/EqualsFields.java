@@ -1,4 +1,4 @@
-package com.example.spring.validation.fields.fromto;
+package com.example.spring.validation.fields.correlation;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.*;
@@ -10,10 +10,10 @@ import javax.validation.constraints.*;
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 @Retention(RUNTIME)
-@Constraint(validatedBy = FromToValidator.class)
-@Repeatable(FromTo.List.class)
+@Constraint(validatedBy = EqualsFieldsValidator.class)
+@Repeatable(EqualsFields.List.class)
 @Documented
-public @interface FromTo {
+public @interface EqualsFields {
 
 	@OverridesAttribute(constraint = Email.class)
 	String message() default "{javax.validation.constraints.NotEmpty.message}";
@@ -28,6 +28,6 @@ public @interface FromTo {
 	@Retention(RUNTIME)
 	@Documented
 	public @interface List {
-		FromTo[] value();
+		EqualsFields[] value();
 	}
 }
