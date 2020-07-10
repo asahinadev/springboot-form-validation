@@ -1,24 +1,21 @@
 package com.example.spring.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.validation.Validator;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.context.*;
+import org.springframework.context.annotation.*;
+import org.springframework.validation.*;
+import org.springframework.validation.beanvalidation.*;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.*;
 
 @Slf4j
 @Configuration
-public class WebConfig implements WebMvcConfigurer {
+public class WebConfig {
 
 	@Autowired
 	MessageSource messageSource;
 
 	@Bean
-	@Override
 	public Validator getValidator() {
 
 		LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
