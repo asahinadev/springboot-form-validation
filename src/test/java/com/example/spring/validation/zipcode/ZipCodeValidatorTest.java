@@ -22,6 +22,7 @@ class ZipCodeValidatorTest {
 			"123-4567"
 	})
 	void ok1(String value) {
+		@Data
 		@AllArgsConstructor
 		class Zip {
 			@ZipCode(fields = "code")
@@ -42,13 +43,70 @@ class ZipCodeValidatorTest {
 			"1234-5678",
 			"123-567"
 	})
-	void erro1r(String value) {
+	void error1(String value) {
+		@Data
 		@AllArgsConstructor
 		class Zip {
 			@ZipCode(fields = "code")
 			String code;
 		}
 		Zip form = new Zip(value);
+
+		BindingResult r = new BindException(form, "form");
+		validator.validate(form, r);
+
+		assertEquals(r.getErrorCount(), 1);
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {
+			"1234567",
+			"123-4567"
+	})
+	void ok2(String value) {
+		@Data
+		@AllArgsConstructor
+		class Zip {
+			String code;
+		}
+
+		@Data
+		@AllArgsConstructor
+		class Form {
+			@ZipCode(fields = "code")
+			Zip zip;
+		}
+
+		Form form = new Form(new Zip(value));
+
+		BindingResult r = new BindException(form, "form");
+		validator.validate(form, r);
+
+		assertEquals(r.getErrorCount(), 0);
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {
+			"123456",
+			"12345678",
+			"1234-5678",
+			"123-567"
+	})
+	void error2(String value) {
+		@Data
+		@AllArgsConstructor
+		class Zip {
+			String code;
+		}
+
+		@Data
+		@AllArgsConstructor
+		class Form {
+			@ZipCode(fields = "code")
+			Zip zip;
+		}
+
+		Form form = new Form(new Zip(value));
 
 		BindingResult r = new BindException(form, "form");
 		validator.validate(form, r);
