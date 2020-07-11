@@ -114,4 +114,59 @@ class ZipCodeValidatorTest {
 		assertEquals(r.getErrorCount(), 1);
 	}
 
+	@ParameterizedTest
+	@CsvSource({
+			"123,4567"
+	})
+	void ok3(String code1, String code2) {
+		@Data
+		@AllArgsConstructor
+		class Zip {
+			String code1;
+			String code2;
+		}
+
+		@Data
+		@AllArgsConstructor
+		class Form {
+			@ZipCode(fields = { "code1", "code2" })
+			Zip zip;
+		}
+
+		Form form = new Form(new Zip(code1, code2));
+
+		BindingResult r = new BindException(form, "form");
+		validator.validate(form, r);
+
+		assertEquals(r.getErrorCount(), 0);
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+			"1234,1234",
+			"123,123",
+	})
+	void error3(String code1, String code2) {
+		@Data
+		@AllArgsConstructor
+		class Zip {
+			String code1;
+			String code2;
+		}
+
+		@Data
+		@AllArgsConstructor
+		class Form {
+			@ZipCode(fields = { "code1", "code2" })
+			Zip zip;
+		}
+
+		Form form = new Form(new Zip(code1, code2));
+
+		BindingResult r = new BindException(form, "form");
+		validator.validate(form, r);
+
+		assertEquals(r.getErrorCount(), 1);
+	}
+
 }
