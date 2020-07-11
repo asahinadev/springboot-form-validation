@@ -1,10 +1,15 @@
 package com.example.spring.validation.zipcode;
 
+import java.util.regex.*;
+
 import javax.validation.*;
 
 import org.apache.commons.lang3.*;
 import org.springframework.beans.*;
 
+import lombok.extern.slf4j.*;
+
+@Slf4j
 public class ZipCodeValidator implements ConstraintValidator<ZipCode, Object> {
 
 	ZipCode annotation;
@@ -39,14 +44,17 @@ public class ZipCodeValidator implements ConstraintValidator<ZipCode, Object> {
 		// 入力状態によりチェックを行う
 		if (StringUtils.isAllEmpty(values)) {
 			// 全項目が未入力なら処理は継続しない
+			log.debug("isAllEmpty {} {}", fields, values);
 			return true;
-		} else if (!StringUtils.isAnyEmpty(values)) {
+		} else if (StringUtils.isAnyEmpty(values)) {
 			// 入力状態がバラバラならばエラーとする
+			log.debug("isAnyEmpty {} {}", fields, values);
 			return false;
 		}
 
-		// パターンチェック
-		return (values[0].length() == 1 && (values[0].matches("\\d{7}") || values[0].matches("\\d{3}-\\d{4}")))
-				|| (values[0].length() == 2 && (values[1].matches("\\d{3}") || values[0].matches("\\d{4}")));
+		String test = String.join("-", values);
+
+		log.debug("test ={}", test);
+		return Pattern.matches("^\\d{3}-?\\d{4}$", test);
 	}
 }
